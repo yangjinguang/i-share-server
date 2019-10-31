@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://127.0.0.1:3306/ishare?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    continue-on-error: true
+    initialization-mode: never
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+wx:
+  appId: wxa3f06c351cfec32d
+  secret: 2a648572ad1f41a82150f5b65f5f1d2b

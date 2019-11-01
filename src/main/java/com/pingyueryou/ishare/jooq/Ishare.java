@@ -4,7 +4,17 @@
 package com.pingyueryou.ishare.jooq;
 
 
+import com.pingyueryou.ishare.jooq.tables.IClass;
+import com.pingyueryou.ishare.jooq.tables.IGrade;
+import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
+import com.pingyueryou.ishare.jooq.tables.IItem;
+import com.pingyueryou.ishare.jooq.tables.IItemTag;
+import com.pingyueryou.ishare.jooq.tables.IRole;
+import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
+import com.pingyueryou.ishare.jooq.tables.IUserClass;
+import com.pingyueryou.ishare.jooq.tables.IUserRole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +40,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Ishare extends SchemaImpl {
 
-    private static final long serialVersionUID = 878028344;
+    private static final long serialVersionUID = 499884750;
 
     /**
      * The reference instance of <code>ishare</code>
@@ -38,9 +48,59 @@ public class Ishare extends SchemaImpl {
     public static final Ishare ISHARE = new Ishare();
 
     /**
+     * The table <code>ishare.i_class</code>.
+     */
+    public final IClass I_CLASS = com.pingyueryou.ishare.jooq.tables.IClass.I_CLASS;
+
+    /**
+     * The table <code>ishare.i_grade</code>.
+     */
+    public final IGrade I_GRADE = com.pingyueryou.ishare.jooq.tables.IGrade.I_GRADE;
+
+    /**
+     * The table <code>ishare.i_id_auth_order</code>.
+     */
+    public final IIdAuthOrder I_ID_AUTH_ORDER = com.pingyueryou.ishare.jooq.tables.IIdAuthOrder.I_ID_AUTH_ORDER;
+
+    /**
+     * The table <code>ishare.i_item</code>.
+     */
+    public final IItem I_ITEM = com.pingyueryou.ishare.jooq.tables.IItem.I_ITEM;
+
+    /**
+     * The table <code>ishare.i_item_tag</code>.
+     */
+    public final IItemTag I_ITEM_TAG = com.pingyueryou.ishare.jooq.tables.IItemTag.I_ITEM_TAG;
+
+    /**
+     * The table <code>ishare.i_role</code>.
+     */
+    public final IRole I_ROLE = com.pingyueryou.ishare.jooq.tables.IRole.I_ROLE;
+
+    /**
+     * The table <code>ishare.i_share</code>.
+     */
+    public final IShare I_SHARE = com.pingyueryou.ishare.jooq.tables.IShare.I_SHARE;
+
+    /**
+     * The table <code>ishare.i_student</code>.
+     */
+    public final IStudent I_STUDENT = com.pingyueryou.ishare.jooq.tables.IStudent.I_STUDENT;
+
+    /**
      * The table <code>ishare.i_user</code>.
      */
     public final IUser I_USER = com.pingyueryou.ishare.jooq.tables.IUser.I_USER;
+
+    /**
+     * The table <code>ishare.i_user_class</code>.
+     */
+    public final IUserClass I_USER_CLASS = com.pingyueryou.ishare.jooq.tables.IUserClass.I_USER_CLASS;
+
+    /**
+     * The table <code>ishare.i_user_role</code>.
+     */
+    public final IUserRole I_USER_ROLE = com.pingyueryou.ishare.jooq.tables.IUserRole.I_USER_ROLE;
 
     /**
      * No further instances allowed
@@ -67,6 +127,16 @@ public class Ishare extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            IUser.I_USER);
+            IClass.I_CLASS,
+            IGrade.I_GRADE,
+            IIdAuthOrder.I_ID_AUTH_ORDER,
+            IItem.I_ITEM,
+            IItemTag.I_ITEM_TAG,
+            IRole.I_ROLE,
+            IShare.I_SHARE,
+            IStudent.I_STUDENT,
+            IUser.I_USER,
+            IUserClass.I_USER_CLASS,
+            IUserRole.I_USER_ROLE);
     }
 }

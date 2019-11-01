@@ -94,6 +94,13 @@ public class IUserDao extends DAOImpl<IUserRecord, com.pingyueryou.ishare.jooq.t
     }
 
     /**
+     * Fetch a unique record that has <code>open_id = value</code>
+     */
+    public com.pingyueryou.ishare.jooq.tables.pojos.IUser fetchOneByOpenId(String value) {
+        return fetchOne(IUser.I_USER.OPEN_ID, value);
+    }
+
+    /**
      * Fetch records that have <code>union_id IN (values)</code>
      */
     public List<com.pingyueryou.ishare.jooq.tables.pojos.IUser> fetchByUnionId(String... values) {

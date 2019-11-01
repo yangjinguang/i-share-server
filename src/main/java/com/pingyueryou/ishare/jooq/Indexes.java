@@ -4,7 +4,17 @@
 package com.pingyueryou.ishare.jooq;
 
 
+import com.pingyueryou.ishare.jooq.tables.IClass;
+import com.pingyueryou.ishare.jooq.tables.IGrade;
+import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
+import com.pingyueryou.ishare.jooq.tables.IItem;
+import com.pingyueryou.ishare.jooq.tables.IItemTag;
+import com.pingyueryou.ishare.jooq.tables.IRole;
+import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
+import com.pingyueryou.ishare.jooq.tables.IUserClass;
+import com.pingyueryou.ishare.jooq.tables.IUserRole;
 
 import javax.annotation.Generated;
 
@@ -30,13 +40,39 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
+    public static final Index I_CLASS_PRIMARY = Indexes0.I_CLASS_PRIMARY;
+    public static final Index I_GRADE_PRIMARY = Indexes0.I_GRADE_PRIMARY;
+    public static final Index I_ID_AUTH_ORDER_PRIMARY = Indexes0.I_ID_AUTH_ORDER_PRIMARY;
+    public static final Index I_ITEM_PRIMARY = Indexes0.I_ITEM_PRIMARY;
+    public static final Index I_ITEM_TAG_PRIMARY = Indexes0.I_ITEM_TAG_PRIMARY;
+    public static final Index I_ROLE_PRIMARY = Indexes0.I_ROLE_PRIMARY;
+    public static final Index I_SHARE_PRIMARY = Indexes0.I_SHARE_PRIMARY;
+    public static final Index I_STUDENT_PRIMARY = Indexes0.I_STUDENT_PRIMARY;
     public static final Index I_USER_PRIMARY = Indexes0.I_USER_PRIMARY;
+    public static final Index I_USER_UK_OPEN_ID = Indexes0.I_USER_UK_OPEN_ID;
+    public static final Index I_USER_CLASS_PRIMARY = Indexes0.I_USER_CLASS_PRIMARY;
+    public static final Index I_USER_CLASS_UK_USER_CLASS_ID = Indexes0.I_USER_CLASS_UK_USER_CLASS_ID;
+    public static final Index I_USER_ROLE_PRIMARY = Indexes0.I_USER_ROLE_PRIMARY;
+    public static final Index I_USER_ROLE_UK_USER_ROLE_ID = Indexes0.I_USER_ROLE_UK_USER_ROLE_ID;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
+        public static Index I_CLASS_PRIMARY = Internal.createIndex("PRIMARY", IClass.I_CLASS, new OrderField[] { IClass.I_CLASS.ID }, true);
+        public static Index I_GRADE_PRIMARY = Internal.createIndex("PRIMARY", IGrade.I_GRADE, new OrderField[] { IGrade.I_GRADE.ID }, true);
+        public static Index I_ID_AUTH_ORDER_PRIMARY = Internal.createIndex("PRIMARY", IIdAuthOrder.I_ID_AUTH_ORDER, new OrderField[] { IIdAuthOrder.I_ID_AUTH_ORDER.ID }, true);
+        public static Index I_ITEM_PRIMARY = Internal.createIndex("PRIMARY", IItem.I_ITEM, new OrderField[] { IItem.I_ITEM.ID }, true);
+        public static Index I_ITEM_TAG_PRIMARY = Internal.createIndex("PRIMARY", IItemTag.I_ITEM_TAG, new OrderField[] { IItemTag.I_ITEM_TAG.ID }, true);
+        public static Index I_ROLE_PRIMARY = Internal.createIndex("PRIMARY", IRole.I_ROLE, new OrderField[] { IRole.I_ROLE.ID }, true);
+        public static Index I_SHARE_PRIMARY = Internal.createIndex("PRIMARY", IShare.I_SHARE, new OrderField[] { IShare.I_SHARE.ID }, true);
+        public static Index I_STUDENT_PRIMARY = Internal.createIndex("PRIMARY", IStudent.I_STUDENT, new OrderField[] { IStudent.I_STUDENT.ID }, true);
         public static Index I_USER_PRIMARY = Internal.createIndex("PRIMARY", IUser.I_USER, new OrderField[] { IUser.I_USER.ID }, true);
+        public static Index I_USER_UK_OPEN_ID = Internal.createIndex("uk_open_id", IUser.I_USER, new OrderField[] { IUser.I_USER.OPEN_ID }, true);
+        public static Index I_USER_CLASS_PRIMARY = Internal.createIndex("PRIMARY", IUserClass.I_USER_CLASS, new OrderField[] { IUserClass.I_USER_CLASS.ID }, true);
+        public static Index I_USER_CLASS_UK_USER_CLASS_ID = Internal.createIndex("uk_user_class_id", IUserClass.I_USER_CLASS, new OrderField[] { IUserClass.I_USER_CLASS.USER_ID, IUserClass.I_USER_CLASS.CLASS_ID }, true);
+        public static Index I_USER_ROLE_PRIMARY = Internal.createIndex("PRIMARY", IUserRole.I_USER_ROLE, new OrderField[] { IUserRole.I_USER_ROLE.ID }, true);
+        public static Index I_USER_ROLE_UK_USER_ROLE_ID = Internal.createIndex("uk_user_role_id", IUserRole.I_USER_ROLE, new OrderField[] { IUserRole.I_USER_ROLE.USER_ID, IUserRole.I_USER_ROLE.ROLE_ID }, true);
     }
 }

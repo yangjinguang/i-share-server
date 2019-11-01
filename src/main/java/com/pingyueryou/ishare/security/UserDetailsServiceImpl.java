@@ -2,7 +2,7 @@ package com.pingyueryou.ishare.security;
 
 
 import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
-import com.pingyueryou.ishare.service.IUserDbService;
+import com.pingyueryou.ishare.dbservice.IUserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

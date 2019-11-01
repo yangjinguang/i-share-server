@@ -4,7 +4,17 @@
 package com.pingyueryou.ishare.jooq;
 
 
+import com.pingyueryou.ishare.jooq.tables.IClass;
+import com.pingyueryou.ishare.jooq.tables.IGrade;
+import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
+import com.pingyueryou.ishare.jooq.tables.IItem;
+import com.pingyueryou.ishare.jooq.tables.IItemTag;
+import com.pingyueryou.ishare.jooq.tables.IRole;
+import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
+import com.pingyueryou.ishare.jooq.tables.IUserClass;
+import com.pingyueryou.ishare.jooq.tables.IUserRole;
 
 import javax.annotation.Generated;
 
@@ -23,7 +33,57 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
+     * The table <code>ishare.i_class</code>.
+     */
+    public static final IClass I_CLASS = com.pingyueryou.ishare.jooq.tables.IClass.I_CLASS;
+
+    /**
+     * The table <code>ishare.i_grade</code>.
+     */
+    public static final IGrade I_GRADE = com.pingyueryou.ishare.jooq.tables.IGrade.I_GRADE;
+
+    /**
+     * The table <code>ishare.i_id_auth_order</code>.
+     */
+    public static final IIdAuthOrder I_ID_AUTH_ORDER = com.pingyueryou.ishare.jooq.tables.IIdAuthOrder.I_ID_AUTH_ORDER;
+
+    /**
+     * The table <code>ishare.i_item</code>.
+     */
+    public static final IItem I_ITEM = com.pingyueryou.ishare.jooq.tables.IItem.I_ITEM;
+
+    /**
+     * The table <code>ishare.i_item_tag</code>.
+     */
+    public static final IItemTag I_ITEM_TAG = com.pingyueryou.ishare.jooq.tables.IItemTag.I_ITEM_TAG;
+
+    /**
+     * The table <code>ishare.i_role</code>.
+     */
+    public static final IRole I_ROLE = com.pingyueryou.ishare.jooq.tables.IRole.I_ROLE;
+
+    /**
+     * The table <code>ishare.i_share</code>.
+     */
+    public static final IShare I_SHARE = com.pingyueryou.ishare.jooq.tables.IShare.I_SHARE;
+
+    /**
+     * The table <code>ishare.i_student</code>.
+     */
+    public static final IStudent I_STUDENT = com.pingyueryou.ishare.jooq.tables.IStudent.I_STUDENT;
+
+    /**
      * The table <code>ishare.i_user</code>.
      */
     public static final IUser I_USER = com.pingyueryou.ishare.jooq.tables.IUser.I_USER;
+
+    /**
+     * The table <code>ishare.i_user_class</code>.
+     */
+    public static final IUserClass I_USER_CLASS = com.pingyueryou.ishare.jooq.tables.IUserClass.I_USER_CLASS;
+
+    /**
+     * The table <code>ishare.i_user_role</code>.
+     */
+    public static final IUserRole I_USER_ROLE = com.pingyueryou.ishare.jooq.tables.IUserRole.I_USER_ROLE;
 }

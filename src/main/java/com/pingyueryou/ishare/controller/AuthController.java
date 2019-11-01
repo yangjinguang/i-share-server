@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pingyueryou.ishare.dbservice.IUserDbService;
 import com.pingyueryou.ishare.entity.LoginBody;
 import com.pingyueryou.ishare.entity.WxSessionResponse;
 import com.pingyueryou.ishare.entity.WxUserInfo;
@@ -13,6 +14,8 @@ import com.pingyueryou.ishare.utils.WxApi;
 import com.pingyueryou.ishare.utils.XResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +31,8 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private IUserDbService iUserDbService;
     @Autowired
     private WxApi wxApi;
 
@@ -53,5 +58,11 @@ public class AuthController {
         stringObjectHashMap.put("accessToken", token);
         stringObjectHashMap.put("profile", xIUser);
         return XResponse.ok(stringObjectHashMap);
+    }
+
+    @RequestMapping(path = "/profile", method = RequestMethod.GET)
+    public ResponseEntity profile() {
+        IUser user = userService.getCurrentUser();
+        return XResponse.ok(user);
     }
 }

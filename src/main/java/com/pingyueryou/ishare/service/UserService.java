@@ -4,4 +4,6 @@ import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
 
 public interface UserService {
     IUser updateByOpenId(String openId, IUser iUser);
+
+    IUser getCurrentUser();
 }

@@ -1,8 +1,8 @@
-package com.pingyueryou.ishare.service.impl;
+package com.pingyueryou.ishare.dbservice.impl;
 
 import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
 import com.pingyueryou.ishare.jooq.tables.records.IUserRecord;
-import com.pingyueryou.ishare.service.IUserDbService;
+import com.pingyueryou.ishare.dbservice.IUserDbService;
 import com.pingyueryou.ishare.utils.XStringUtils;
 import org.jooq.DSLContext;
 import org.jooq.exception.NoDataFoundException;

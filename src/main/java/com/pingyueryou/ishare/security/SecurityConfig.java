@@ -24,7 +24,7 @@ import org.springframework.web.client.HttpServerErrorException;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
 
     @Autowired

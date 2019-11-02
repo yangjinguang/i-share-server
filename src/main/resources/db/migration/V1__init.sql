@@ -12,29 +12,20 @@ CREATE TABLE `i_user` (
   UNIQUE KEY `uk_open_id` (`open_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `i_role` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) NOT NULL DEFAULT '',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE `i_user_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `role_id` bigint(20) NOT NULL,
+  `role` tinyint(4) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_user_role_id` (`user_id`,`role_id`)
+  UNIQUE KEY `uk_user_id_role` (`user_id`,`role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `i_student` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL DEFAULT '',
   `class_id` bigint(20) NOT NULL,
-  `parent_id` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -108,19 +99,47 @@ CREATE TABLE `i_share` (
 CREATE TABLE `i_id_auth_order` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `role_id` bigint(20) NOT NULL,
+  `role` tinyint(4) NOT NULL,
   `class_id` bigint(20) NOT NULL,
   `child_name` varchar(255) NOT NULL DEFAULT '',
   `relation` varchar(255) NOT NULL DEFAULT '',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `i_user_student` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `student_id` bigint(20) NOT NULL,
+  `relation` varchar(255) NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_user_student_id` (`user_id`,`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `i_role` (`id`, `name`, `created_at`, `updated_at`)
+CREATE TABLE `i_item_lend_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `item_id` bigint(20) NOT NULL,
+  `class_id` bigint(20) NOT NULL,
+  `student_id` bigint(20) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `i_grade` (`name`)
 VALUES
-	(1, '游客', '2019-11-01 06:49:46', '2019-11-01 06:49:46'),
-	(2, '管理员', '2019-11-01 06:49:53', '2019-11-01 06:49:53'),
-	(3, '教师', '2019-11-01 06:50:01', '2019-11-01 06:50:01'),
-	(4, '家长', '2019-11-01 06:50:04', '2019-11-01 06:50:04');
+	('大班');
+
+
+INSERT INTO `i_class` (`name`, `grade_id`)
+VALUES
+	('一班', 1),
+	('二班', 1),
+	('三班', 1);
+

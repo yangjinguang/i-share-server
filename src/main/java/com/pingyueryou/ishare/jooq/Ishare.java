@@ -8,13 +8,14 @@ import com.pingyueryou.ishare.jooq.tables.IClass;
 import com.pingyueryou.ishare.jooq.tables.IGrade;
 import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
 import com.pingyueryou.ishare.jooq.tables.IItem;
+import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
-import com.pingyueryou.ishare.jooq.tables.IRole;
 import com.pingyueryou.ishare.jooq.tables.IShare;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
 import com.pingyueryou.ishare.jooq.tables.IUserClass;
 import com.pingyueryou.ishare.jooq.tables.IUserRole;
+import com.pingyueryou.ishare.jooq.tables.IUserStudent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +41,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Ishare extends SchemaImpl {
 
-    private static final long serialVersionUID = 499884750;
+    private static final long serialVersionUID = -152727907;
 
     /**
      * The reference instance of <code>ishare</code>
@@ -68,14 +69,14 @@ public class Ishare extends SchemaImpl {
     public final IItem I_ITEM = com.pingyueryou.ishare.jooq.tables.IItem.I_ITEM;
 
     /**
+     * The table <code>ishare.i_item_lend_order</code>.
+     */
+    public final IItemLendOrder I_ITEM_LEND_ORDER = com.pingyueryou.ishare.jooq.tables.IItemLendOrder.I_ITEM_LEND_ORDER;
+
+    /**
      * The table <code>ishare.i_item_tag</code>.
      */
     public final IItemTag I_ITEM_TAG = com.pingyueryou.ishare.jooq.tables.IItemTag.I_ITEM_TAG;
-
-    /**
-     * The table <code>ishare.i_role</code>.
-     */
-    public final IRole I_ROLE = com.pingyueryou.ishare.jooq.tables.IRole.I_ROLE;
 
     /**
      * The table <code>ishare.i_share</code>.
@@ -101,6 +102,11 @@ public class Ishare extends SchemaImpl {
      * The table <code>ishare.i_user_role</code>.
      */
     public final IUserRole I_USER_ROLE = com.pingyueryou.ishare.jooq.tables.IUserRole.I_USER_ROLE;
+
+    /**
+     * The table <code>ishare.i_user_student</code>.
+     */
+    public final IUserStudent I_USER_STUDENT = com.pingyueryou.ishare.jooq.tables.IUserStudent.I_USER_STUDENT;
 
     /**
      * No further instances allowed
@@ -131,12 +137,13 @@ public class Ishare extends SchemaImpl {
             IGrade.I_GRADE,
             IIdAuthOrder.I_ID_AUTH_ORDER,
             IItem.I_ITEM,
+            IItemLendOrder.I_ITEM_LEND_ORDER,
             IItemTag.I_ITEM_TAG,
-            IRole.I_ROLE,
             IShare.I_SHARE,
             IStudent.I_STUDENT,
             IUser.I_USER,
             IUserClass.I_USER_CLASS,
-            IUserRole.I_USER_ROLE);
+            IUserRole.I_USER_ROLE,
+            IUserStudent.I_USER_STUDENT);
     }
 }

@@ -8,24 +8,26 @@ import com.pingyueryou.ishare.jooq.tables.IClass;
 import com.pingyueryou.ishare.jooq.tables.IGrade;
 import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
 import com.pingyueryou.ishare.jooq.tables.IItem;
+import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
-import com.pingyueryou.ishare.jooq.tables.IRole;
 import com.pingyueryou.ishare.jooq.tables.IShare;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
 import com.pingyueryou.ishare.jooq.tables.IUserClass;
 import com.pingyueryou.ishare.jooq.tables.IUserRole;
+import com.pingyueryou.ishare.jooq.tables.IUserStudent;
 import com.pingyueryou.ishare.jooq.tables.records.IClassRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IGradeRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IIdAuthOrderRecord;
+import com.pingyueryou.ishare.jooq.tables.records.IItemLendOrderRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemTagRecord;
-import com.pingyueryou.ishare.jooq.tables.records.IRoleRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IShareRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IStudentRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IUserClassRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IUserRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IUserRoleRecord;
+import com.pingyueryou.ishare.jooq.tables.records.IUserStudentRecord;
 
 import javax.annotation.Generated;
 
@@ -56,13 +58,14 @@ public class Keys {
     public static final Identity<IGradeRecord, Long> IDENTITY_I_GRADE = Identities0.IDENTITY_I_GRADE;
     public static final Identity<IIdAuthOrderRecord, Long> IDENTITY_I_ID_AUTH_ORDER = Identities0.IDENTITY_I_ID_AUTH_ORDER;
     public static final Identity<IItemRecord, Long> IDENTITY_I_ITEM = Identities0.IDENTITY_I_ITEM;
+    public static final Identity<IItemLendOrderRecord, Long> IDENTITY_I_ITEM_LEND_ORDER = Identities0.IDENTITY_I_ITEM_LEND_ORDER;
     public static final Identity<IItemTagRecord, Long> IDENTITY_I_ITEM_TAG = Identities0.IDENTITY_I_ITEM_TAG;
-    public static final Identity<IRoleRecord, Long> IDENTITY_I_ROLE = Identities0.IDENTITY_I_ROLE;
     public static final Identity<IShareRecord, Long> IDENTITY_I_SHARE = Identities0.IDENTITY_I_SHARE;
     public static final Identity<IStudentRecord, Long> IDENTITY_I_STUDENT = Identities0.IDENTITY_I_STUDENT;
     public static final Identity<IUserRecord, Long> IDENTITY_I_USER = Identities0.IDENTITY_I_USER;
     public static final Identity<IUserClassRecord, Long> IDENTITY_I_USER_CLASS = Identities0.IDENTITY_I_USER_CLASS;
     public static final Identity<IUserRoleRecord, Long> IDENTITY_I_USER_ROLE = Identities0.IDENTITY_I_USER_ROLE;
+    public static final Identity<IUserStudentRecord, Long> IDENTITY_I_USER_STUDENT = Identities0.IDENTITY_I_USER_STUDENT;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -72,8 +75,8 @@ public class Keys {
     public static final UniqueKey<IGradeRecord> KEY_I_GRADE_PRIMARY = UniqueKeys0.KEY_I_GRADE_PRIMARY;
     public static final UniqueKey<IIdAuthOrderRecord> KEY_I_ID_AUTH_ORDER_PRIMARY = UniqueKeys0.KEY_I_ID_AUTH_ORDER_PRIMARY;
     public static final UniqueKey<IItemRecord> KEY_I_ITEM_PRIMARY = UniqueKeys0.KEY_I_ITEM_PRIMARY;
+    public static final UniqueKey<IItemLendOrderRecord> KEY_I_ITEM_LEND_ORDER_PRIMARY = UniqueKeys0.KEY_I_ITEM_LEND_ORDER_PRIMARY;
     public static final UniqueKey<IItemTagRecord> KEY_I_ITEM_TAG_PRIMARY = UniqueKeys0.KEY_I_ITEM_TAG_PRIMARY;
-    public static final UniqueKey<IRoleRecord> KEY_I_ROLE_PRIMARY = UniqueKeys0.KEY_I_ROLE_PRIMARY;
     public static final UniqueKey<IShareRecord> KEY_I_SHARE_PRIMARY = UniqueKeys0.KEY_I_SHARE_PRIMARY;
     public static final UniqueKey<IStudentRecord> KEY_I_STUDENT_PRIMARY = UniqueKeys0.KEY_I_STUDENT_PRIMARY;
     public static final UniqueKey<IUserRecord> KEY_I_USER_PRIMARY = UniqueKeys0.KEY_I_USER_PRIMARY;
@@ -81,7 +84,9 @@ public class Keys {
     public static final UniqueKey<IUserClassRecord> KEY_I_USER_CLASS_PRIMARY = UniqueKeys0.KEY_I_USER_CLASS_PRIMARY;
     public static final UniqueKey<IUserClassRecord> KEY_I_USER_CLASS_UK_USER_CLASS_ID = UniqueKeys0.KEY_I_USER_CLASS_UK_USER_CLASS_ID;
     public static final UniqueKey<IUserRoleRecord> KEY_I_USER_ROLE_PRIMARY = UniqueKeys0.KEY_I_USER_ROLE_PRIMARY;
-    public static final UniqueKey<IUserRoleRecord> KEY_I_USER_ROLE_UK_USER_ROLE_ID = UniqueKeys0.KEY_I_USER_ROLE_UK_USER_ROLE_ID;
+    public static final UniqueKey<IUserRoleRecord> KEY_I_USER_ROLE_UK_USER_ID_ROLE = UniqueKeys0.KEY_I_USER_ROLE_UK_USER_ID_ROLE;
+    public static final UniqueKey<IUserStudentRecord> KEY_I_USER_STUDENT_PRIMARY = UniqueKeys0.KEY_I_USER_STUDENT_PRIMARY;
+    public static final UniqueKey<IUserStudentRecord> KEY_I_USER_STUDENT_UK_USER_STUDENT_ID = UniqueKeys0.KEY_I_USER_STUDENT_UK_USER_STUDENT_ID;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -97,13 +102,14 @@ public class Keys {
         public static Identity<IGradeRecord, Long> IDENTITY_I_GRADE = Internal.createIdentity(IGrade.I_GRADE, IGrade.I_GRADE.ID);
         public static Identity<IIdAuthOrderRecord, Long> IDENTITY_I_ID_AUTH_ORDER = Internal.createIdentity(IIdAuthOrder.I_ID_AUTH_ORDER, IIdAuthOrder.I_ID_AUTH_ORDER.ID);
         public static Identity<IItemRecord, Long> IDENTITY_I_ITEM = Internal.createIdentity(IItem.I_ITEM, IItem.I_ITEM.ID);
+        public static Identity<IItemLendOrderRecord, Long> IDENTITY_I_ITEM_LEND_ORDER = Internal.createIdentity(IItemLendOrder.I_ITEM_LEND_ORDER, IItemLendOrder.I_ITEM_LEND_ORDER.ID);
         public static Identity<IItemTagRecord, Long> IDENTITY_I_ITEM_TAG = Internal.createIdentity(IItemTag.I_ITEM_TAG, IItemTag.I_ITEM_TAG.ID);
-        public static Identity<IRoleRecord, Long> IDENTITY_I_ROLE = Internal.createIdentity(IRole.I_ROLE, IRole.I_ROLE.ID);
         public static Identity<IShareRecord, Long> IDENTITY_I_SHARE = Internal.createIdentity(IShare.I_SHARE, IShare.I_SHARE.ID);
         public static Identity<IStudentRecord, Long> IDENTITY_I_STUDENT = Internal.createIdentity(IStudent.I_STUDENT, IStudent.I_STUDENT.ID);
         public static Identity<IUserRecord, Long> IDENTITY_I_USER = Internal.createIdentity(IUser.I_USER, IUser.I_USER.ID);
         public static Identity<IUserClassRecord, Long> IDENTITY_I_USER_CLASS = Internal.createIdentity(IUserClass.I_USER_CLASS, IUserClass.I_USER_CLASS.ID);
         public static Identity<IUserRoleRecord, Long> IDENTITY_I_USER_ROLE = Internal.createIdentity(IUserRole.I_USER_ROLE, IUserRole.I_USER_ROLE.ID);
+        public static Identity<IUserStudentRecord, Long> IDENTITY_I_USER_STUDENT = Internal.createIdentity(IUserStudent.I_USER_STUDENT, IUserStudent.I_USER_STUDENT.ID);
     }
 
     private static class UniqueKeys0 {
@@ -111,8 +117,8 @@ public class Keys {
         public static final UniqueKey<IGradeRecord> KEY_I_GRADE_PRIMARY = Internal.createUniqueKey(IGrade.I_GRADE, "KEY_i_grade_PRIMARY", IGrade.I_GRADE.ID);
         public static final UniqueKey<IIdAuthOrderRecord> KEY_I_ID_AUTH_ORDER_PRIMARY = Internal.createUniqueKey(IIdAuthOrder.I_ID_AUTH_ORDER, "KEY_i_id_auth_order_PRIMARY", IIdAuthOrder.I_ID_AUTH_ORDER.ID);
         public static final UniqueKey<IItemRecord> KEY_I_ITEM_PRIMARY = Internal.createUniqueKey(IItem.I_ITEM, "KEY_i_item_PRIMARY", IItem.I_ITEM.ID);
+        public static final UniqueKey<IItemLendOrderRecord> KEY_I_ITEM_LEND_ORDER_PRIMARY = Internal.createUniqueKey(IItemLendOrder.I_ITEM_LEND_ORDER, "KEY_i_item_lend_order_PRIMARY", IItemLendOrder.I_ITEM_LEND_ORDER.ID);
         public static final UniqueKey<IItemTagRecord> KEY_I_ITEM_TAG_PRIMARY = Internal.createUniqueKey(IItemTag.I_ITEM_TAG, "KEY_i_item_tag_PRIMARY", IItemTag.I_ITEM_TAG.ID);
-        public static final UniqueKey<IRoleRecord> KEY_I_ROLE_PRIMARY = Internal.createUniqueKey(IRole.I_ROLE, "KEY_i_role_PRIMARY", IRole.I_ROLE.ID);
         public static final UniqueKey<IShareRecord> KEY_I_SHARE_PRIMARY = Internal.createUniqueKey(IShare.I_SHARE, "KEY_i_share_PRIMARY", IShare.I_SHARE.ID);
         public static final UniqueKey<IStudentRecord> KEY_I_STUDENT_PRIMARY = Internal.createUniqueKey(IStudent.I_STUDENT, "KEY_i_student_PRIMARY", IStudent.I_STUDENT.ID);
         public static final UniqueKey<IUserRecord> KEY_I_USER_PRIMARY = Internal.createUniqueKey(IUser.I_USER, "KEY_i_user_PRIMARY", IUser.I_USER.ID);
@@ -120,6 +126,8 @@ public class Keys {
         public static final UniqueKey<IUserClassRecord> KEY_I_USER_CLASS_PRIMARY = Internal.createUniqueKey(IUserClass.I_USER_CLASS, "KEY_i_user_class_PRIMARY", IUserClass.I_USER_CLASS.ID);
         public static final UniqueKey<IUserClassRecord> KEY_I_USER_CLASS_UK_USER_CLASS_ID = Internal.createUniqueKey(IUserClass.I_USER_CLASS, "KEY_i_user_class_uk_user_class_id", IUserClass.I_USER_CLASS.USER_ID, IUserClass.I_USER_CLASS.CLASS_ID);
         public static final UniqueKey<IUserRoleRecord> KEY_I_USER_ROLE_PRIMARY = Internal.createUniqueKey(IUserRole.I_USER_ROLE, "KEY_i_user_role_PRIMARY", IUserRole.I_USER_ROLE.ID);
-        public static final UniqueKey<IUserRoleRecord> KEY_I_USER_ROLE_UK_USER_ROLE_ID = Internal.createUniqueKey(IUserRole.I_USER_ROLE, "KEY_i_user_role_uk_user_role_id", IUserRole.I_USER_ROLE.USER_ID, IUserRole.I_USER_ROLE.ROLE_ID);
+        public static final UniqueKey<IUserRoleRecord> KEY_I_USER_ROLE_UK_USER_ID_ROLE = Internal.createUniqueKey(IUserRole.I_USER_ROLE, "KEY_i_user_role_uk_user_id_role", IUserRole.I_USER_ROLE.USER_ID, IUserRole.I_USER_ROLE.ROLE);
+        public static final UniqueKey<IUserStudentRecord> KEY_I_USER_STUDENT_PRIMARY = Internal.createUniqueKey(IUserStudent.I_USER_STUDENT, "KEY_i_user_student_PRIMARY", IUserStudent.I_USER_STUDENT.ID);
+        public static final UniqueKey<IUserStudentRecord> KEY_I_USER_STUDENT_UK_USER_STUDENT_ID = Internal.createUniqueKey(IUserStudent.I_USER_STUDENT, "KEY_i_user_student_uk_user_student_id", IUserStudent.I_USER_STUDENT.USER_ID, IUserStudent.I_USER_STUDENT.STUDENT_ID);
     }
 }

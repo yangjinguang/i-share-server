@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IClassDbService;
+import com.pingyueryou.ishare.entity.IGradeExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IGrade;
 import com.pingyueryou.ishare.utils.ErrorCode;
@@ -11,6 +12,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,7 @@ public class ClassController {
     @Autowired
     private IClassDbService iClassDbService;
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity crate(@RequestBody IClass body) {
         IClass iClass = new IClass();
         Long gradeId = body.getGradeId();
@@ -28,7 +30,7 @@ public class ClassController {
             return XResponse.errorCode(ErrorCode.GRADE_NOT_FOUND);
         }
         String name = body.getName();
-        if (!XStringUtils.isEmpty(name)) {
+        if (XStringUtils.isEmpty(name)) {
             return XResponse.errorCode(ErrorCode.CLASS_NAME_EMPTY);
         }
         iClass.setGradeId(gradeId);
@@ -49,6 +51,18 @@ public class ClassController {
     public ResponseEntity delete(@PathVariable(value = "classId") Long classId) {
         iClassDbService.delete(classId);
         return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "/tree", method = RequestMethod.GET)
+    public ResponseEntity tree() {
+        List<IGrade> allGrade = iClassDbService.getAllGrade();
+        ArrayList<IGradeExtra> iGradeExtras = new ArrayList<>();
+        for (IGrade iGrade : allGrade) {
+            List<IClass> byGradeId = iClassDbService.getByGradeId(iGrade.getId());
+            IGradeExtra iGradeExtra = new IGradeExtra(iGrade, byGradeId);
+            iGradeExtras.add(iGradeExtra);
+        }
+        return XResponse.ok(iGradeExtras);
     }
 
 }

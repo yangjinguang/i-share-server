@@ -73,10 +73,10 @@ public class IUserRoleDao extends DAOImpl<IUserRoleRecord, com.pingyueryou.ishar
     }
 
     /**
-     * Fetch records that have <code>role_id IN (values)</code>
+     * Fetch records that have <code>role IN (values)</code>
      */
-    public List<com.pingyueryou.ishare.jooq.tables.pojos.IUserRole> fetchByRoleId(Long... values) {
-        return fetch(IUserRole.I_USER_ROLE.ROLE_ID, values);
+    public List<com.pingyueryou.ishare.jooq.tables.pojos.IUserRole> fetchByRole(Integer... values) {
+        return fetch(IUserRole.I_USER_ROLE.ROLE, values);
     }
 
     /**

@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IIdAuthOrder extends TableImpl<IIdAuthOrderRecord> {
 
-    private static final long serialVersionUID = -1885597638;
+    private static final long serialVersionUID = 2147293677;
 
     /**
      * The reference instance of <code>ishare.i_id_auth_order</code>
@@ -66,9 +66,9 @@ public class IIdAuthOrder extends TableImpl<IIdAuthOrderRecord> {
     public final TableField<IIdAuthOrderRecord, Long> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>ishare.i_id_auth_order.role_id</code>.
+     * The column <code>ishare.i_id_auth_order.role</code>.
      */
-    public final TableField<IIdAuthOrderRecord, Long> ROLE_ID = createField("role_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<IIdAuthOrderRecord, Integer> ROLE = createField("role", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>ishare.i_id_auth_order.class_id</code>.
@@ -84,6 +84,11 @@ public class IIdAuthOrder extends TableImpl<IIdAuthOrderRecord> {
      * The column <code>ishare.i_id_auth_order.relation</code>.
      */
     public final TableField<IIdAuthOrderRecord, String> RELATION = createField("relation", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>ishare.i_id_auth_order.status</code>.
+     */
+    public final TableField<IIdAuthOrderRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>ishare.i_id_auth_order.created_at</code>.

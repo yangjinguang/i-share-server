@@ -80,13 +80,6 @@ public class IStudentDao extends DAOImpl<IStudentRecord, com.pingyueryou.ishare.
     }
 
     /**
-     * Fetch records that have <code>parent_id IN (values)</code>
-     */
-    public List<com.pingyueryou.ishare.jooq.tables.pojos.IStudent> fetchByParentId(Long... values) {
-        return fetch(IStudent.I_STUDENT.PARENT_ID, values);
-    }
-
-    /**
      * Fetch records that have <code>created_at IN (values)</code>
      */
     public List<com.pingyueryou.ishare.jooq.tables.pojos.IStudent> fetchByCreatedAt(Timestamp... values) {

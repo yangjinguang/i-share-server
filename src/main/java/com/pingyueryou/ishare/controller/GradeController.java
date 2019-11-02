@@ -20,11 +20,11 @@ public class GradeController {
     private IClassDbService iClassDbService;
 
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity crate(@RequestBody IGrade body) {
         IGrade iGrade = new IGrade();
         String name = body.getName();
-        if (!XStringUtils.isEmpty(name)) {
+        if (XStringUtils.isEmpty(name)) {
             return XResponse.errorCode(ErrorCode.CLASS_NAME_EMPTY);
         }
         iGrade.setName(body.getName());
@@ -33,7 +33,7 @@ public class GradeController {
         return XResponse.ok(resIGrade);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity getAll() {
         List<IGrade> allGrade = iClassDbService.getAllGrade();
         return XResponse.ok(allGrade);

@@ -1,9 +1,11 @@
 package com.pingyueryou.ishare.utils;
 
+import com.pingyueryou.ishare.entity.Pagination;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class XResponse {
@@ -18,6 +20,14 @@ public class XResponse {
 
     public static ResponseEntity ok(Object data) {
         Map<String, Object> body = bodyBuild(200, null, data);
+        return ResponseEntity.ok(body);
+    }
+
+    private static ResponseEntity ok(Pagination pagination, List<Object> list) {
+        HashMap<String, Object> listMap = new HashMap<>();
+        listMap.put("pagination", pagination);
+        listMap.put("list", list);
+        Map<String, Object> body = bodyBuild(200, null, listMap);
         return ResponseEntity.ok(body);
     }
 

@@ -73,10 +73,10 @@ public class IIdAuthOrderDao extends DAOImpl<IIdAuthOrderRecord, com.pingyueryou
     }
 
     /**
-     * Fetch records that have <code>role_id IN (values)</code>
+     * Fetch records that have <code>role IN (values)</code>
      */
-    public List<com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder> fetchByRoleId(Long... values) {
-        return fetch(IIdAuthOrder.I_ID_AUTH_ORDER.ROLE_ID, values);
+    public List<com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder> fetchByRole(Integer... values) {
+        return fetch(IIdAuthOrder.I_ID_AUTH_ORDER.ROLE, values);
     }
 
     /**
@@ -98,6 +98,13 @@ public class IIdAuthOrderDao extends DAOImpl<IIdAuthOrderRecord, com.pingyueryou
      */
     public List<com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder> fetchByRelation(String... values) {
         return fetch(IIdAuthOrder.I_ID_AUTH_ORDER.RELATION, values);
+    }
+
+    /**
+     * Fetch records that have <code>status IN (values)</code>
+     */
+    public List<com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder> fetchByStatus(Integer... values) {
+        return fetch(IIdAuthOrder.I_ID_AUTH_ORDER.STATUS, values);
     }
 
     /**

@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IStudent extends TableImpl<IStudentRecord> {
 
-    private static final long serialVersionUID = -90928641;
+    private static final long serialVersionUID = 1126354142;
 
     /**
      * The reference instance of <code>ishare.i_student</code>
@@ -69,11 +69,6 @@ public class IStudent extends TableImpl<IStudentRecord> {
      * The column <code>ishare.i_student.class_id</code>.
      */
     public final TableField<IStudentRecord, Long> CLASS_ID = createField("class_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>ishare.i_student.parent_id</code>.
-     */
-    public final TableField<IStudentRecord, Long> PARENT_ID = createField("parent_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>ishare.i_student.created_at</code>.

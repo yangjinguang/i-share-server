@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IUserRole extends TableImpl<IUserRoleRecord> {
 
-    private static final long serialVersionUID = 563520102;
+    private static final long serialVersionUID = -1057226188;
 
     /**
      * The reference instance of <code>ishare.i_user_role</code>
@@ -66,9 +66,9 @@ public class IUserRole extends TableImpl<IUserRoleRecord> {
     public final TableField<IUserRoleRecord, Long> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>ishare.i_user_role.role_id</code>.
+     * The column <code>ishare.i_user_role.role</code>.
      */
-    public final TableField<IUserRoleRecord, Long> ROLE_ID = createField("role_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<IUserRoleRecord, Integer> ROLE = createField("role", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("1", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>ishare.i_user_role.created_at</code>.
@@ -122,7 +122,7 @@ public class IUserRole extends TableImpl<IUserRoleRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.I_USER_ROLE_PRIMARY, Indexes.I_USER_ROLE_UK_USER_ROLE_ID);
+        return Arrays.<Index>asList(Indexes.I_USER_ROLE_PRIMARY, Indexes.I_USER_ROLE_UK_USER_ID_ROLE);
     }
 
     /**
@@ -146,7 +146,7 @@ public class IUserRole extends TableImpl<IUserRoleRecord> {
      */
     @Override
     public List<UniqueKey<IUserRoleRecord>> getKeys() {
-        return Arrays.<UniqueKey<IUserRoleRecord>>asList(Keys.KEY_I_USER_ROLE_PRIMARY, Keys.KEY_I_USER_ROLE_UK_USER_ROLE_ID);
+        return Arrays.<UniqueKey<IUserRoleRecord>>asList(Keys.KEY_I_USER_ROLE_PRIMARY, Keys.KEY_I_USER_ROLE_UK_USER_ID_ROLE);
     }
 
     /**

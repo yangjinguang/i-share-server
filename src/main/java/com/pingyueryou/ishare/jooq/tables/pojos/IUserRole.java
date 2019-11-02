@@ -23,11 +23,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IUserRole implements Serializable {
 
-    private static final long serialVersionUID = -945968638;
+    private static final long serialVersionUID = 1207683391;
 
     private Long      id;
     private Long      userId;
-    private Long      roleId;
+    private Integer   role;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -36,7 +36,7 @@ public class IUserRole implements Serializable {
     public IUserRole(IUserRole value) {
         this.id = value.id;
         this.userId = value.userId;
-        this.roleId = value.roleId;
+        this.role = value.role;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
     }
@@ -44,13 +44,13 @@ public class IUserRole implements Serializable {
     public IUserRole(
         Long      id,
         Long      userId,
-        Long      roleId,
+        Integer   role,
         Timestamp createdAt,
         Timestamp updatedAt
     ) {
         this.id = id;
         this.userId = userId;
-        this.roleId = roleId;
+        this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -71,12 +71,12 @@ public class IUserRole implements Serializable {
         this.userId = userId;
     }
 
-    public Long getRoleId() {
-        return this.roleId;
+    public Integer getRole() {
+        return this.role;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     public Timestamp getCreatedAt() {
@@ -101,7 +101,7 @@ public class IUserRole implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(userId);
-        sb.append(", ").append(roleId);
+        sb.append(", ").append(role);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);
 

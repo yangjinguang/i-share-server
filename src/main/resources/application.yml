@@ -10,3 +10,8 @@ spring:
 wx:
   appId: wxa3f06c351cfec32d
   secret: 2a648572ad1f41a82150f5b65f5f1d2b
+
+logging:
+  level:
+    org:
+      jooq: DEBUG

@@ -3,6 +3,7 @@ package com.pingyueryou.ishare.dbservice.impl;
 import com.pingyueryou.ishare.dbservice.IClassDbService;
 import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IGrade;
+import com.pingyueryou.ishare.jooq.tables.pojos.IUserClass;
 import com.pingyueryou.ishare.jooq.tables.records.IClassRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IGradeRecord;
 import org.jooq.DSLContext;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import static com.pingyueryou.ishare.jooq.tables.IClass.I_CLASS;
 import static com.pingyueryou.ishare.jooq.tables.IGrade.I_GRADE;
+import static com.pingyueryou.ishare.jooq.tables.IUserClass.I_USER_CLASS;
 
 @Service
 public class IClassDbServiceImpl implements IClassDbService {
@@ -62,6 +64,7 @@ public class IClassDbServiceImpl implements IClassDbService {
     public List<IClass> getByGradeId(Long gradeId) {
         return context.selectFrom(I_CLASS)
                 .where(I_CLASS.GRADE_ID.eq(gradeId))
+                .orderBy(I_CLASS.ORDER)
                 .fetch()
                 .into(IClass.class);
     }
@@ -69,6 +72,7 @@ public class IClassDbServiceImpl implements IClassDbService {
     @Override
     public List<IGrade> getAllGrade() {
         return context.selectFrom(I_GRADE)
+                .orderBy(I_GRADE.ORDER)
                 .fetch()
                 .into(IGrade.class);
     }
@@ -87,4 +91,28 @@ public class IClassDbServiceImpl implements IClassDbService {
                 .execute();
     }
 
+    @Override
+    public List<IClass> getByUserId(Long userId) {
+        return context.select(I_CLASS.fields())
+                .from(I_USER_CLASS)
+                .leftJoin(I_CLASS)
+                .on(I_CLASS.ID.eq(I_USER_CLASS.CLASS_ID))
+                .where(I_USER_CLASS.USER_ID.eq(userId))
+                .fetch()
+                .into(IClass.class);
+    }
+
+    @Override
+    public void createUserClass(IUserClass userClass) {
+        context.newRecord(I_USER_CLASS, userClass).store();
+    }
+
+    @Override
+    public void deleteUserClass(Long userId, Long classId) {
+        context.deleteFrom(I_USER_CLASS)
+                .where(I_USER_CLASS.USER_ID.eq(userId))
+                .and(I_USER_CLASS.CLASS_ID.eq(classId))
+                .execute();
+
+    }
 }

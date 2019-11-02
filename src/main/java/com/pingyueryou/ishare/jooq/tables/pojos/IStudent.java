@@ -23,12 +23,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IStudent implements Serializable {
 
-    private static final long serialVersionUID = -479750524;
+    private static final long serialVersionUID = -928885747;
 
     private Long      id;
     private String    name;
     private Long      classId;
-    private Long      parentId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -38,7 +37,6 @@ public class IStudent implements Serializable {
         this.id = value.id;
         this.name = value.name;
         this.classId = value.classId;
-        this.parentId = value.parentId;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
     }
@@ -47,14 +45,12 @@ public class IStudent implements Serializable {
         Long      id,
         String    name,
         Long      classId,
-        Long      parentId,
         Timestamp createdAt,
         Timestamp updatedAt
     ) {
         this.id = id;
         this.name = name;
         this.classId = classId;
-        this.parentId = parentId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -83,14 +79,6 @@ public class IStudent implements Serializable {
         this.classId = classId;
     }
 
-    public Long getParentId() {
-        return this.parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
     public Timestamp getCreatedAt() {
         return this.createdAt;
     }
@@ -114,7 +102,6 @@ public class IStudent implements Serializable {
         sb.append(id);
         sb.append(", ").append(name);
         sb.append(", ").append(classId);
-        sb.append(", ").append(parentId);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);
 

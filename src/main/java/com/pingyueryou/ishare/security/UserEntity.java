@@ -1,5 +1,6 @@
 package com.pingyueryou.ishare.security;
 
+import com.pingyueryou.ishare.entity.IUserExtra;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,7 @@ public class UserEntity implements UserDetails, Serializable {
     private Long id;
     private String username;
     private String password;
+    private IUserExtra user;
 
     private List<GrantedAuthority> authorities;
 
@@ -46,6 +48,14 @@ public class UserEntity implements UserDetails, Serializable {
 
     public void setAuthorities(List<GrantedAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    public IUserExtra getUser() {
+        return user;
+    }
+
+    public void setUser(IUserExtra user) {
+        this.user = user;
     }
 
     /**

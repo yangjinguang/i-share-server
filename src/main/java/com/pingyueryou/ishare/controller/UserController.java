@@ -1,10 +1,8 @@
 package com.pingyueryou.ishare.controller;
 
+import com.pingyueryou.ishare.dbservice.IClassDbService;
 import com.pingyueryou.ishare.dbservice.IIdAuthOrderDbService;
-import com.pingyueryou.ishare.entity.IUserExtra;
-import com.pingyueryou.ishare.entity.IdAuthHandleBody;
-import com.pingyueryou.ishare.entity.IdAuthOrderStatus;
-import com.pingyueryou.ishare.entity.Role;
+import com.pingyueryou.ishare.entity.*;
 import com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder;
 import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
 import com.pingyueryou.ishare.service.UserService;
@@ -22,6 +20,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private IIdAuthOrderDbService iIdAuthOrderDbService;
+    @Autowired
+    private IClassDbService iClassDbService;
 
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
     public ResponseEntity profile() {
@@ -52,6 +52,14 @@ public class UserController {
         order.setRelation(relation);
         iIdAuthOrderDbService.create(order);
         return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "/id-auth/{orderId}", method = RequestMethod.GET)
+    public ResponseEntity idAuthDetail(@PathVariable(value = "orderId") Long orderId) {
+        IIdAuthOrderExtra iIdAuthOrder = iIdAuthOrderDbService.get(orderId);
+        IClassExtra iClassExtra = iClassDbService.get(iIdAuthOrder.getClassId());
+        iIdAuthOrder.setiClass(iClassExtra);
+        return XResponse.ok(iIdAuthOrder);
     }
 
     @RequestMapping(path = "/id-auth/handle", method = RequestMethod.PUT)

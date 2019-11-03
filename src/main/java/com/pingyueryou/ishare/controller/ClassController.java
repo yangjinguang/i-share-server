@@ -2,8 +2,10 @@ package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IClassDbService;
 import com.pingyueryou.ishare.entity.IGradeExtra;
+import com.pingyueryou.ishare.entity.IUserExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IGrade;
+import com.pingyueryou.ishare.service.UserService;
 import com.pingyueryou.ishare.utils.ErrorCode;
 import com.pingyueryou.ishare.utils.XResponse;
 import com.pingyueryou.ishare.utils.XStringUtils;
@@ -20,9 +22,15 @@ import java.util.List;
 public class ClassController {
     @Autowired
     private IClassDbService iClassDbService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity crate(@RequestBody IClass body) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isAdmin()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
         IClass iClass = new IClass();
         Long gradeId = body.getGradeId();
         IGrade grade = iClassDbService.getGrade(gradeId);
@@ -41,7 +49,23 @@ public class ClassController {
         return XResponse.ok(resIClass);
     }
 
-    @RequestMapping(path = "/byGrade/{gradeId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{classId}", method = RequestMethod.GET)
+    public ResponseEntity get(@PathVariable(value = "classId") Long classId) {
+        IClass iClass = iClassDbService.get(classId);
+        return XResponse.ok(iClass);
+    }
+
+    @RequestMapping(path = "/{classId}", method = RequestMethod.PUT)
+    public ResponseEntity update(@PathVariable(value = "classId") Long classId, @RequestBody IClass iClass) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isAdmin()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        IClass update = iClassDbService.update(classId, iClass);
+        return XResponse.ok(update);
+    }
+
+    @RequestMapping(path = "/byGradeId/{gradeId}", method = RequestMethod.GET)
     public ResponseEntity getByGradeId(@PathVariable(value = "gradeId") Long gradeId) {
         List<IClass> byGradeId = iClassDbService.getByGradeId(gradeId);
         return XResponse.ok(byGradeId);
@@ -49,6 +73,10 @@ public class ClassController {
 
     @RequestMapping(path = "/{classId}", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable(value = "classId") Long classId) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isAdmin()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
         iClassDbService.delete(classId);
         return XResponse.ok("success");
     }
@@ -63,6 +91,19 @@ public class ClassController {
             iGradeExtras.add(iGradeExtra);
         }
         return XResponse.ok(iGradeExtras);
+    }
+
+    @RequestMapping(path = "/order", method = RequestMethod.PUT)
+    public ResponseEntity order(@RequestBody List<Long> classIds) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isAdmin()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        for (int i = 0; i < classIds.size(); i++) {
+            Long classId = classIds.get(i);
+            iClassDbService.updateOrder(classId, i);
+        }
+        return XResponse.ok("success");
     }
 
 }

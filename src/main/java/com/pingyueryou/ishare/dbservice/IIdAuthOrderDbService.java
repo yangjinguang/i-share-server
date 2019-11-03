@@ -16,7 +16,7 @@ public interface IIdAuthOrderDbService {
 
     List<IIdAuthOrderExtra> getParentOrders(List<Long> classIds);
 
-    IIdAuthOrder get(Long id);
+    IIdAuthOrderExtra get(Long id);
 
     void changeStatus(Long orderId, Integer status);
 }

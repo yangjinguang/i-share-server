@@ -1,5 +1,6 @@
 package com.pingyueryou.ishare.dbservice;
 
+import com.pingyueryou.ishare.entity.IClassExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IGrade;
 import com.pingyueryou.ishare.jooq.tables.pojos.IUserClass;
@@ -11,7 +12,7 @@ public interface IClassDbService {
 
     IGrade createGrade(IGrade iGrade);
 
-    IClass get(Long classId);
+    IClassExtra get(Long classId);
 
     IGrade getGrade(Long gradeId);
 
@@ -28,4 +29,12 @@ public interface IClassDbService {
     void createUserClass(IUserClass userClass);
 
     void deleteUserClass(Long userId, Long classId);
+
+    IClass update(Long classId, IClass iClass);
+
+    IGrade updateGrade(Long gradeId, IGrade grade);
+
+    void updateOrder(Long classId, Integer order);
+    void updateGradeOrder(Long gradeId, Integer order);
+
 }

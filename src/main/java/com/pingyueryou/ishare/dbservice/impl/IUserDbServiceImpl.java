@@ -78,7 +78,7 @@ public class IUserDbServiceImpl implements IUserDbService {
         IUserRole iUserRole = new IUserRole();
         iUserRole.setUserId(userId);
         iUserRole.setRole(role);
-        context.newRecord(I_USER_ROLE, iUserRole);
+        context.newRecord(I_USER_ROLE, iUserRole).store();
     }
 
     @Override

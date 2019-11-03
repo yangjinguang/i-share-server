@@ -47,7 +47,7 @@ public class TodoController {
     }
 
     @RequestMapping("")
-    public ResponseEntity getByUserId() {
+    public ResponseEntity list() {
         IUserExtra currentUser = userService.getCurrentUser();
         Long userId = currentUser.getId();
         List<IIdAuthOrderExtra> iIdAuthOrders = new ArrayList<>();

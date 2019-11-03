@@ -2,10 +2,12 @@ package com.pingyueryou.ishare.dbservice.impl;
 
 import com.pingyueryou.ishare.dbservice.IIdAuthOrderDbService;
 import com.pingyueryou.ishare.entity.IIdAuthOrderExtra;
+import com.pingyueryou.ishare.entity.IdAuthOrderStatus;
 import com.pingyueryou.ishare.entity.Role;
 import com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder;
 import com.pingyueryou.ishare.jooq.tables.records.IIdAuthOrderRecord;
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,7 @@ public class IIdAuthOrderDbServiceImpl implements IIdAuthOrderDbService {
     public Integer countTeacherOrders() {
         return context.selectCount().from(I_ID_AUTH_ORDER)
                 .where(I_ID_AUTH_ORDER.ROLE.eq(Role.TEACHER.getIndex()))
+                .and(I_ID_AUTH_ORDER.STATUS.eq(IdAuthOrderStatus.NEW.getIndex()))
                 .fetchOne()
                 .into(Integer.class);
     }
@@ -42,6 +45,7 @@ public class IIdAuthOrderDbServiceImpl implements IIdAuthOrderDbService {
                 .leftJoin(I_USER)
                 .on(I_USER.ID.eq(I_ID_AUTH_ORDER.USER_ID))
                 .where(I_ID_AUTH_ORDER.ROLE.eq(Role.TEACHER.getIndex()))
+                .and(I_ID_AUTH_ORDER.STATUS.eq(IdAuthOrderStatus.NEW.getIndex()))
                 .fetch()
                 .into(IIdAuthOrderExtra.class);
     }
@@ -51,6 +55,7 @@ public class IIdAuthOrderDbServiceImpl implements IIdAuthOrderDbService {
         return context.selectCount().from(I_ID_AUTH_ORDER)
                 .where(I_ID_AUTH_ORDER.ROLE.eq(Role.PARENT.getIndex()))
                 .and(I_ID_AUTH_ORDER.CLASS_ID.in(classIds))
+                .and(I_ID_AUTH_ORDER.STATUS.eq(IdAuthOrderStatus.NEW.getIndex()))
                 .fetchOne()
                 .into(Integer.class);
     }
@@ -64,18 +69,23 @@ public class IIdAuthOrderDbServiceImpl implements IIdAuthOrderDbService {
                 .on(I_USER.ID.eq(I_ID_AUTH_ORDER.USER_ID))
                 .where(I_ID_AUTH_ORDER.ROLE.eq(Role.PARENT.getIndex()))
                 .and(I_ID_AUTH_ORDER.CLASS_ID.in(classIds))
+                .and(I_ID_AUTH_ORDER.STATUS.eq(IdAuthOrderStatus.NEW.getIndex()))
                 .fetch()
                 .into(IIdAuthOrderExtra.class);
     }
 
     @Override
-    public IIdAuthOrder get(Long id) {
-        IIdAuthOrderRecord iIdAuthOrderRecord = context.selectFrom(I_ID_AUTH_ORDER)
+    public IIdAuthOrderExtra get(Long id) {
+        Record nickName = context.select(I_ID_AUTH_ORDER.fields())
+                .select(I_USER.NICK_NAME.as("nickName"))
+                .from(I_ID_AUTH_ORDER)
+                .leftJoin(I_USER)
+                .on(I_USER.ID.eq(I_ID_AUTH_ORDER.USER_ID))
                 .where(I_ID_AUTH_ORDER.ID.eq(id))
                 .fetchOptional()
                 .orElse(null);
-        if (iIdAuthOrderRecord != null) {
-            return iIdAuthOrderRecord.into(IIdAuthOrder.class);
+        if (nickName != null) {
+            return nickName.into(IIdAuthOrderExtra.class);
         }
         return null;
     }

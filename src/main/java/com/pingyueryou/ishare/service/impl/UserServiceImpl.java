@@ -38,6 +38,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public IUserExtra detail(String openId) {
+        IUserExtra userEx = iUserDbService.getByOpenId(openId);
+        List<IClass> classes = iClassDbService.getByUserId(userEx.getId());
+        userEx.setClasses(classes);
+        return userEx;
+    }
+
+    @Override
     public IUserExtra getCurrentUser() {
         UserEntity userEntity = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userEntity.getUser();

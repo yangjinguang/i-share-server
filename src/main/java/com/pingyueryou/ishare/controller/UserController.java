@@ -3,6 +3,7 @@ package com.pingyueryou.ishare.controller;
 import com.pingyueryou.ishare.dbservice.IClassDbService;
 import com.pingyueryou.ishare.dbservice.IIdAuthOrderDbService;
 import com.pingyueryou.ishare.entity.*;
+import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder;
 import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
 import com.pingyueryou.ishare.service.UserService;
@@ -12,6 +13,8 @@ import com.pingyueryou.ishare.utils.XStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -25,7 +28,9 @@ public class UserController {
 
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
     public ResponseEntity profile() {
-        IUser user = userService.getCurrentUser();
+        IUserExtra user = userService.getCurrentUser();
+        List<IClass> classes = iClassDbService.getByUserId(user.getId());
+        user.setClasses(classes);
         return XResponse.ok(user);
     }
 

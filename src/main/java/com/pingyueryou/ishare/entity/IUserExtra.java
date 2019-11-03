@@ -1,11 +1,13 @@
 package com.pingyueryou.ishare.entity;
 
+import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
 
 import java.util.List;
 
 public class IUserExtra extends IUser {
     private List<Integer> roles;
+    private List<IClass> classes;
 
     public IUserExtra() {
     }
@@ -25,6 +27,14 @@ public class IUserExtra extends IUser {
 
     public void setRoles(List<Integer> roles) {
         this.roles = roles;
+    }
+
+    public List<IClass> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<IClass> classes) {
+        this.classes = classes;
     }
 
     public boolean isAdmin() {

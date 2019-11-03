@@ -8,12 +8,15 @@ import java.util.List;
 public interface UserService {
     IUser updateByOpenId(String openId, IUser iUser);
 
+    IUserExtra detail(String openId);
+
     IUserExtra getCurrentUser();
 
     List<Long> getClassIds(Long userId);
 
-    void addRole(Long userId,Integer role);
-    void rmRole(Long userId,Integer role);
+    void addRole(Long userId, Integer role);
+
+    void rmRole(Long userId, Integer role);
 
     void joinClass(Long userId, Long classId);
 

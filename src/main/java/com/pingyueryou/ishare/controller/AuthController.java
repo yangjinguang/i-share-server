@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pingyueryou.ishare.entity.IUserExtra;
 import com.pingyueryou.ishare.entity.LoginBody;
 import com.pingyueryou.ishare.entity.WxSessionResponse;
 import com.pingyueryou.ishare.entity.WxUserInfo;
@@ -42,14 +43,15 @@ public class AuthController {
         iUser.setNickName(userInfo.getNickName());
         iUser.setAvatarUrl(userInfo.getAvatarUrl());
         iUser.setGender(userInfo.getGender());
-        IUser xIUser = userService.updateByOpenId(iUser.getOpenId(), iUser);
+        userService.updateByOpenId(iUser.getOpenId(), iUser);
+        IUserExtra xUser = userService.detail(iUser.getOpenId());
         UserEntity userEntity = new UserEntity();
-        userEntity.setId(xIUser.getId());
-        userEntity.setUsername(xIUser.getOpenId());
+        userEntity.setId(xUser.getId());
+        userEntity.setUsername(xUser.getOpenId());
         String token = jwtTokenUtil.generateToken(userEntity);
         HashMap<String, Object> stringObjectHashMap = new HashMap<>();
         stringObjectHashMap.put("accessToken", token);
-        stringObjectHashMap.put("profile", xIUser);
+        stringObjectHashMap.put("profile", xUser);
         return XResponse.ok(stringObjectHashMap);
     }
 }

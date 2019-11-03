@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IIdAuthOrderRecord extends UpdatableRecordImpl<IIdAuthOrderRecord> implements Record9<Long, Long, Integer, Long, String, String, Integer, Timestamp, Timestamp> {
 
-    private static final long serialVersionUID = 1645587422;
+    private static final long serialVersionUID = 2037790688;
 
     /**
      * Setter for <code>ishare.i_id_auth_order.id</code>.
@@ -89,16 +89,16 @@ public class IIdAuthOrderRecord extends UpdatableRecordImpl<IIdAuthOrderRecord> 
     }
 
     /**
-     * Setter for <code>ishare.i_id_auth_order.child_name</code>.
+     * Setter for <code>ishare.i_id_auth_order.student_name</code>.
      */
-    public void setChildName(String value) {
+    public void setStudentName(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>ishare.i_id_auth_order.child_name</code>.
+     * Getter for <code>ishare.i_id_auth_order.student_name</code>.
      */
-    public String getChildName() {
+    public String getStudentName() {
         return (String) get(4);
     }
 
@@ -227,7 +227,7 @@ public class IIdAuthOrderRecord extends UpdatableRecordImpl<IIdAuthOrderRecord> 
      */
     @Override
     public Field<String> field5() {
-        return IIdAuthOrder.I_ID_AUTH_ORDER.CHILD_NAME;
+        return IIdAuthOrder.I_ID_AUTH_ORDER.STUDENT_NAME;
     }
 
     /**
@@ -299,7 +299,7 @@ public class IIdAuthOrderRecord extends UpdatableRecordImpl<IIdAuthOrderRecord> 
      */
     @Override
     public String component5() {
-        return getChildName();
+        return getStudentName();
     }
 
     /**
@@ -371,7 +371,7 @@ public class IIdAuthOrderRecord extends UpdatableRecordImpl<IIdAuthOrderRecord> 
      */
     @Override
     public String value5() {
-        return getChildName();
+        return getStudentName();
     }
 
     /**
@@ -447,7 +447,7 @@ public class IIdAuthOrderRecord extends UpdatableRecordImpl<IIdAuthOrderRecord> 
      */
     @Override
     public IIdAuthOrderRecord value5(String value) {
-        setChildName(value);
+        setStudentName(value);
         return this;
     }
 
@@ -518,14 +518,14 @@ public class IIdAuthOrderRecord extends UpdatableRecordImpl<IIdAuthOrderRecord> 
     /**
      * Create a detached, initialised IIdAuthOrderRecord
      */
-    public IIdAuthOrderRecord(Long id, Long userId, Integer role, Long classId, String childName, String relation, Integer status, Timestamp createdAt, Timestamp updatedAt) {
+    public IIdAuthOrderRecord(Long id, Long userId, Integer role, Long classId, String studentName, String relation, Integer status, Timestamp createdAt, Timestamp updatedAt) {
         super(IIdAuthOrder.I_ID_AUTH_ORDER);
 
         set(0, id);
         set(1, userId);
         set(2, role);
         set(3, classId);
-        set(4, childName);
+        set(4, studentName);
         set(5, relation);
         set(6, status);
         set(7, createdAt);

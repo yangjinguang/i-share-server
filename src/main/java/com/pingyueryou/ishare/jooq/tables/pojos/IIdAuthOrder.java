@@ -23,13 +23,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IIdAuthOrder implements Serializable {
 
-    private static final long serialVersionUID = -1524504371;
+    private static final long serialVersionUID = -1789759824;
 
     private Long      id;
     private Long      userId;
     private Integer   role;
     private Long      classId;
-    private String    childName;
+    private String    studentName;
     private String    relation;
     private Integer   status;
     private Timestamp createdAt;
@@ -42,7 +42,7 @@ public class IIdAuthOrder implements Serializable {
         this.userId = value.userId;
         this.role = value.role;
         this.classId = value.classId;
-        this.childName = value.childName;
+        this.studentName = value.studentName;
         this.relation = value.relation;
         this.status = value.status;
         this.createdAt = value.createdAt;
@@ -54,7 +54,7 @@ public class IIdAuthOrder implements Serializable {
         Long      userId,
         Integer   role,
         Long      classId,
-        String    childName,
+        String    studentName,
         String    relation,
         Integer   status,
         Timestamp createdAt,
@@ -64,7 +64,7 @@ public class IIdAuthOrder implements Serializable {
         this.userId = userId;
         this.role = role;
         this.classId = classId;
-        this.childName = childName;
+        this.studentName = studentName;
         this.relation = relation;
         this.status = status;
         this.createdAt = createdAt;
@@ -103,12 +103,12 @@ public class IIdAuthOrder implements Serializable {
         this.classId = classId;
     }
 
-    public String getChildName() {
-        return this.childName;
+    public String getStudentName() {
+        return this.studentName;
     }
 
-    public void setChildName(String childName) {
-        this.childName = childName;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public String getRelation() {
@@ -151,7 +151,7 @@ public class IIdAuthOrder implements Serializable {
         sb.append(", ").append(userId);
         sb.append(", ").append(role);
         sb.append(", ").append(classId);
-        sb.append(", ").append(childName);
+        sb.append(", ").append(studentName);
         sb.append(", ").append(relation);
         sb.append(", ").append(status);
         sb.append(", ").append(createdAt);

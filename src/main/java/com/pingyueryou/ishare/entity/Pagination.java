@@ -8,6 +8,12 @@ public class Pagination {
     public Pagination() {
     }
 
+    public Pagination(Integer total, Integer page, Integer size) {
+        this.total = total;
+        this.page = page;
+        this.size = size;
+    }
+
     public Integer getTotal() {
         return total;
     }

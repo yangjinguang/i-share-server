@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class XResponse {
 
-    public static Map<String, Object> bodyBuild(int code, String message, Object data) {
+    private static Map<String, Object> bodyBuild(int code, String message, Object data) {
         HashMap<String, Object> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("code", code);
         objectObjectHashMap.put("message", message);
@@ -23,7 +23,7 @@ public class XResponse {
         return ResponseEntity.ok(body);
     }
 
-    private static ResponseEntity ok(Pagination pagination, List<Object> list) {
+    public static ResponseEntity ok(Pagination pagination, Object list) {
         HashMap<String, Object> listMap = new HashMap<>();
         listMap.put("pagination", pagination);
         listMap.put("list", list);

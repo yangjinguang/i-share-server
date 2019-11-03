@@ -87,10 +87,10 @@ public class IIdAuthOrderDao extends DAOImpl<IIdAuthOrderRecord, com.pingyueryou
     }
 
     /**
-     * Fetch records that have <code>child_name IN (values)</code>
+     * Fetch records that have <code>student_name IN (values)</code>
      */
-    public List<com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder> fetchByChildName(String... values) {
-        return fetch(IIdAuthOrder.I_ID_AUTH_ORDER.CHILD_NAME, values);
+    public List<com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder> fetchByStudentName(String... values) {
+        return fetch(IIdAuthOrder.I_ID_AUTH_ORDER.STUDENT_NAME, values);
     }
 
     /**

@@ -5,7 +5,6 @@ import com.pingyueryou.ishare.dbservice.IIdAuthOrderDbService;
 import com.pingyueryou.ishare.entity.*;
 import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IIdAuthOrder;
-import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
 import com.pingyueryou.ishare.service.UserService;
 import com.pingyueryou.ishare.utils.ErrorCode;
 import com.pingyueryou.ishare.utils.XResponse;
@@ -39,13 +38,13 @@ public class UserController {
         IUserExtra currentUser = userService.getCurrentUser();
         Long classId = body.getClassId();
         Integer role = body.getRole();
-        String childName = body.getChildName();
+        String studentName = body.getStudentName();
         String relation = body.getRelation();
         if (classId == null || role == null) {
             return XResponse.errorCode(ErrorCode.PARAM_ERROR);
         }
         if (role.equals(Role.PARENT.getIndex())) {
-            if (XStringUtils.isEmpty(childName) || XStringUtils.isEmpty(relation)) {
+            if (XStringUtils.isEmpty(studentName) || XStringUtils.isEmpty(relation)) {
                 return XResponse.errorCode(ErrorCode.PARAM_ERROR);
             }
         }
@@ -53,7 +52,7 @@ public class UserController {
         order.setUserId(currentUser.getId());
         order.setRole(role);
         order.setClassId(classId);
-        order.setChildName(childName);
+        order.setStudentName(studentName);
         order.setRelation(relation);
         iIdAuthOrderDbService.create(order);
         return XResponse.ok("success");

@@ -101,7 +101,7 @@ CREATE TABLE `i_id_auth_order` (
   `user_id` bigint(20) NOT NULL,
   `role` tinyint(4) NOT NULL,
   `class_id` bigint(20) NOT NULL,
-  `child_name` varchar(255) NOT NULL DEFAULT '',
+  `student_name` varchar(255) NOT NULL DEFAULT '',
   `relation` varchar(255) NOT NULL DEFAULT '',
   `status` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

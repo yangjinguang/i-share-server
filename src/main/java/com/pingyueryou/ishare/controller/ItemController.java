@@ -1,9 +1,12 @@
 package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IItemDbService;
+import com.pingyueryou.ishare.entity.IItemCreateData;
+import com.pingyueryou.ishare.entity.IUserExtra;
 import com.pingyueryou.ishare.entity.Pagination;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
+import com.pingyueryou.ishare.service.UserService;
 import com.pingyueryou.ishare.utils.ErrorCode;
 import com.pingyueryou.ishare.utils.XResponse;
 import com.pingyueryou.ishare.utils.XStringUtils;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,10 +22,18 @@ import java.util.List;
 public class ItemController {
     @Autowired
     private IItemDbService iItemDbService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody IItem item) {
-        return XResponse.ok("success");
+    public ResponseEntity create(@RequestBody IItemCreateData createData) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isTeacher()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        createData.setUploadUserId(currentUser.getId());
+        IItem iItem = iItemDbService.create(createData);
+        return XResponse.ok(iItem);
     }
 
     @RequestMapping(path = "/tag", method = RequestMethod.POST)
@@ -57,5 +69,36 @@ public class ItemController {
     public ResponseEntity deleteTag(@PathVariable(value = "tagId") Long tagId) {
         iItemDbService.deleteTag(tagId);
         return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "", method = RequestMethod.GET)
+    public ResponseEntity query(@RequestParam(value = "classId", required = false) Long classId,
+                                @RequestParam(value = "tagId", required = false) Long tagId,
+                                @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                @RequestParam(value = "size", defaultValue = "20") Integer size) {
+        Integer offset = page - 1;
+        ArrayList<Long> classIds = new ArrayList<>();
+        if (classId != null) {
+            classIds.add(classId);
+        } else {
+            classIds = null;
+        }
+        Integer total = iItemDbService.count(classIds, tagId);
+        List<IItem> query = iItemDbService.query(classIds, tagId, offset, size);
+        return XResponse.ok(new Pagination(page, total, size), query);
+    }
+
+    @RequestMapping(path = "/mgr", method = RequestMethod.GET)
+    public ResponseEntity queryMgr(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                   @RequestParam(value = "size", defaultValue = "20") Integer size) {
+        Integer offset = page - 1;
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isTeacher()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        List<Long> classIds = userService.getClassIds(currentUser.getId());
+        Integer total = iItemDbService.count(classIds, null);
+        List<IItem> query = iItemDbService.query(classIds, null, offset, size);
+        return XResponse.ok(new Pagination(page, total, size), query);
     }
 }

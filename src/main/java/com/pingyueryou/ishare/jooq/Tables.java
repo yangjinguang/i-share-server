@@ -10,6 +10,7 @@ import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
 import com.pingyueryou.ishare.jooq.tables.IItem;
 import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
+import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
@@ -62,6 +63,11 @@ public class Tables {
      * The table <code>ishare.i_item_tag</code>.
      */
     public static final IItemTag I_ITEM_TAG = com.pingyueryou.ishare.jooq.tables.IItemTag.I_ITEM_TAG;
+
+    /**
+     * The table <code>ishare.i_item_tag_item</code>.
+     */
+    public static final IItemTagItem I_ITEM_TAG_ITEM = com.pingyueryou.ishare.jooq.tables.IItemTagItem.I_ITEM_TAG_ITEM;
 
     /**
      * The table <code>ishare.i_share</code>.

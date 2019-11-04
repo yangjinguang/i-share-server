@@ -10,6 +10,7 @@ import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
 import com.pingyueryou.ishare.jooq.tables.IItem;
 import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
+import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
@@ -41,7 +42,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Ishare extends SchemaImpl {
 
-    private static final long serialVersionUID = -152727907;
+    private static final long serialVersionUID = 381770306;
 
     /**
      * The reference instance of <code>ishare</code>
@@ -77,6 +78,11 @@ public class Ishare extends SchemaImpl {
      * The table <code>ishare.i_item_tag</code>.
      */
     public final IItemTag I_ITEM_TAG = com.pingyueryou.ishare.jooq.tables.IItemTag.I_ITEM_TAG;
+
+    /**
+     * The table <code>ishare.i_item_tag_item</code>.
+     */
+    public final IItemTagItem I_ITEM_TAG_ITEM = com.pingyueryou.ishare.jooq.tables.IItemTagItem.I_ITEM_TAG_ITEM;
 
     /**
      * The table <code>ishare.i_share</code>.
@@ -139,6 +145,7 @@ public class Ishare extends SchemaImpl {
             IItem.I_ITEM,
             IItemLendOrder.I_ITEM_LEND_ORDER,
             IItemTag.I_ITEM_TAG,
+            IItemTagItem.I_ITEM_TAG_ITEM,
             IShare.I_SHARE,
             IStudent.I_STUDENT,
             IUser.I_USER,

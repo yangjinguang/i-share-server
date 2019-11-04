@@ -66,7 +66,7 @@ CREATE TABLE `i_item` (
   `title` varchar(255) NOT NULL DEFAULT '',
   `cover_url` varchar(255) NOT NULL DEFAULT '',
   `desc` varchar(500) NOT NULL DEFAULT '',
-  `status` tinyint(4) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   `upload_user_id` bigint(20) NOT NULL,
   `class_id` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

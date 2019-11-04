@@ -15,3 +15,9 @@ logging:
   level:
     org:
       jooq: DEBUG
+
+qiniu:
+  domain: s.pingyueryou.com
+  accessKey: gb8L0fGExt3GVPwbzcI-01TiTcP30cCaY3RVvYy8
+  secretKey: 6wJJ-hhbJ44bTPr4Yrh1OGlL6UZ5xGFUkkz6uR0h
+  bucket: ishare

@@ -48,6 +48,16 @@ public class ItemController {
         return XResponse.ok(iItem);
     }
 
+    @RequestMapping(path = "/{itemId}", method = RequestMethod.DELETE)
+    public ResponseEntity delete(@PathVariable(value = "itemId") Long itemId) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isTeacher()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        iItemDbService.delete(itemId);
+        return XResponse.ok("success");
+    }
+
     @RequestMapping(path = "/tag", method = RequestMethod.POST)
     public ResponseEntity createTag(@RequestBody IItemTag tag) {
         String name = tag.getName();

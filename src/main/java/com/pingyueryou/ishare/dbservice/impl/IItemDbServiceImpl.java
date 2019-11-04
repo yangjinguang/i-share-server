@@ -86,6 +86,13 @@ public class IItemDbServiceImpl implements IItemDbService {
     }
 
     @Override
+    public void delete(Long itemId) {
+        context.deleteFrom(I_ITEM)
+                .where(I_ITEM.ID.eq(itemId))
+                .execute();
+    }
+
+    @Override
     public IItemTag createTag(IItemTag tag) {
         IItemTagRecord iItemTagRecord = context.newRecord(I_ITEM_TAG, tag);
         iItemTagRecord.store();

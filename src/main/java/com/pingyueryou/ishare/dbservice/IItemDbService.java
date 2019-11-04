@@ -13,6 +13,8 @@ public interface IItemDbService {
 
     IItem update(Long itemId, IItemCreateData createData);
 
+    void delete(Long itemId);
+
     IItemTag createTag(IItemTag tag);
 
     void bindTags(Long itemId, List<Long> tagIds);

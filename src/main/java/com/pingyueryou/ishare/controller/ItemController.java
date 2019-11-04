@@ -44,7 +44,7 @@ public class ItemController {
             return XResponse.errorCode(ErrorCode.FORBIDDEN);
         }
         createData.setUploadUserId(currentUser.getId());
-        IItem iItem = iItemDbService.create(createData);
+        IItem iItem = iItemDbService.update(itemId, createData);
         return XResponse.ok(iItem);
     }
 

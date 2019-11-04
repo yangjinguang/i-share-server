@@ -36,6 +36,18 @@ public class ItemController {
         return XResponse.ok(iItem);
     }
 
+    @RequestMapping(path = "/{itemId}", method = RequestMethod.PUT)
+    public ResponseEntity update(@PathVariable(value = "itemId") Long itemId,
+                                 @RequestBody IItemCreateData createData) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isTeacher()) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        createData.setUploadUserId(currentUser.getId());
+        IItem iItem = iItemDbService.create(createData);
+        return XResponse.ok(iItem);
+    }
+
     @RequestMapping(path = "/tag", method = RequestMethod.POST)
     public ResponseEntity createTag(@RequestBody IItemTag tag) {
         String name = tag.getName();

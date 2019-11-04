@@ -11,6 +11,8 @@ public interface IItemDbService {
 
     IItem create(IItemCreateData createData);
 
+    IItem update(Long itemId, IItemCreateData createData);
+
     IItemTag createTag(IItemTag tag);
 
     void bindTags(Long itemId, List<Long> tagIds);

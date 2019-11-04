@@ -34,8 +34,7 @@ public class IItemDbServiceImpl implements IItemDbService {
         return iItemRecord.into(IItem.class);
     }
 
-    @Override
-    public IItem create(IItemCreateData createData) {
+    private IItem iItemGen(IItemCreateData createData) {
         IItem iItem = new IItem();
         iItem.setClassId(createData.getClassId());
         iItem.setCoverUrl(createData.getCoverUrl());
@@ -43,8 +42,46 @@ public class IItemDbServiceImpl implements IItemDbService {
         iItem.setTitle(createData.getTitle());
         iItem.setType(createData.getType());
         iItem.setUploadUserId(createData.getUploadUserId());
+        return iItem;
+    }
+
+    @Override
+    public IItem create(IItemCreateData createData) {
+        IItem iItem = iItemGen(createData);
         IItem iItem1 = create(iItem);
         bindTags(iItem1.getId(), createData.getTagIds());
+        return null;
+    }
+
+    @Override
+    public IItem update(Long itemId, IItemCreateData createData) {
+        IItemRecord iItemRecord = context.selectFrom(I_ITEM)
+                .where(I_ITEM.ID.eq(itemId))
+                .fetchOptional()
+                .orElseThrow(NoDataFoundException::new);
+        Long classId = createData.getClassId();
+        if (classId != null) {
+            iItemRecord.setClassId(classId);
+        }
+        String title = createData.getTitle();
+        if (!XStringUtils.isEmpty(title)) {
+            iItemRecord.setTitle(title);
+        }
+        String coverUrl = createData.getCoverUrl();
+        if (!XStringUtils.isEmpty(coverUrl)) {
+            iItemRecord.setCoverUrl(coverUrl);
+        }
+        String desc = createData.getDesc();
+        if (!XStringUtils.isEmpty(desc)) {
+            iItemRecord.setDesc(desc);
+        }
+        Integer type = createData.getType();
+        if (type != null) {
+            iItemRecord.setType(type);
+        }
+        iItemRecord.update();
+        clearTags(itemId);
+        bindTags(itemId, createData.getTagIds());
         return null;
     }
 
@@ -53,6 +90,12 @@ public class IItemDbServiceImpl implements IItemDbService {
         IItemTagRecord iItemTagRecord = context.newRecord(I_ITEM_TAG, tag);
         iItemTagRecord.store();
         return iItemTagRecord.into(IItemTag.class);
+    }
+
+    private void clearTags(Long itemId) {
+        context.deleteFrom(I_ITEM_TAG_ITEM)
+                .where(I_ITEM_TAG_ITEM.ITEM_ID.eq(itemId))
+                .execute();
     }
 
     private void bindTag(Long itemId, Long tagId) {

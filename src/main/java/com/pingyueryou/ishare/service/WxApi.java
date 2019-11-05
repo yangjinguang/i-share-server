@@ -1,4 +1,4 @@
-package com.pingyueryou.ishare.utils;
+package com.pingyueryou.ishare.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonInclude;

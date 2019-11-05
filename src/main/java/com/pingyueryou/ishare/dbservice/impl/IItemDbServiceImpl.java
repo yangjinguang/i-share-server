@@ -2,6 +2,7 @@ package com.pingyueryou.ishare.dbservice.impl;
 
 import com.pingyueryou.ishare.dbservice.IItemDbService;
 import com.pingyueryou.ishare.entity.IItemCreateData;
+import com.pingyueryou.ishare.entity.IItemExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTagItem;
@@ -10,6 +11,7 @@ import com.pingyueryou.ishare.jooq.tables.records.IItemTagRecord;
 import com.pingyueryou.ishare.utils.XStringUtils;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.jooq.exception.NoDataFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import java.util.List;
 import static com.pingyueryou.ishare.jooq.tables.IItem.I_ITEM;
 import static com.pingyueryou.ishare.jooq.tables.IItemTag.I_ITEM_TAG;
 import static com.pingyueryou.ishare.jooq.tables.IItemTagItem.I_ITEM_TAG_ITEM;
+import static com.pingyueryou.ishare.jooq.tables.IUser.I_USER;
 
 @Service
 public class IItemDbServiceImpl implements IItemDbService {
@@ -137,6 +140,17 @@ public class IItemDbServiceImpl implements IItemDbService {
     }
 
     @Override
+    public List<IItemTag> getTagsByItemId(Long itemId) {
+        return context.select(I_ITEM_TAG.fields())
+                .from(I_ITEM_TAG_ITEM)
+                .leftJoin(I_ITEM_TAG)
+                .on(I_ITEM_TAG.ID.eq(I_ITEM_TAG_ITEM.TAG_ID))
+                .where(I_ITEM_TAG_ITEM.ITEM_ID.eq(itemId))
+                .fetch()
+                .into(IItemTag.class);
+    }
+
+    @Override
     public IItemTag getTag(Long tagId) {
         IItemTagRecord iItemTagRecord = context.selectFrom(I_ITEM_TAG)
                 .where(I_ITEM_TAG.ID.eq(tagId))
@@ -218,5 +232,21 @@ public class IItemDbServiceImpl implements IItemDbService {
                     .fetch()
                     .into(IItem.class);
         }
+    }
+
+    @Override
+    public IItemExtra get(Long itemId) {
+        Record iItemRecord = context.select(I_ITEM.fields())
+                .select(I_USER.NICK_NAME.as("upload_user_name"))
+                .from(I_ITEM)
+                .leftJoin(I_USER)
+                .on(I_USER.ID.eq(I_ITEM.UPLOAD_USER_ID))
+                .where(I_ITEM.ID.eq(itemId))
+                .fetchOptional()
+                .orElse(null);
+        if (iItemRecord != null) {
+            return iItemRecord.into(IItemExtra.class);
+        }
+        return null;
     }
 }

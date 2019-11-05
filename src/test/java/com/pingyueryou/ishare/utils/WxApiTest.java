@@ -2,6 +2,7 @@ package com.pingyueryou.ishare.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pingyueryou.ishare.entity.WxSessionResponse;
+import com.pingyueryou.ishare.service.WxApi;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.lang.invoke.MethodHandles;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

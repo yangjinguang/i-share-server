@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IItem extends TableImpl<IItemRecord> {
 
-    private static final long serialVersionUID = 701784986;
+    private static final long serialVersionUID = -279417670;
 
     /**
      * The reference instance of <code>ishare.i_item</code>
@@ -83,7 +83,7 @@ public class IItem extends TableImpl<IItemRecord> {
     /**
      * The column <code>ishare.i_item.status</code>.
      */
-    public final TableField<IItemRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<IItemRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>ishare.i_item.upload_user_id</code>.

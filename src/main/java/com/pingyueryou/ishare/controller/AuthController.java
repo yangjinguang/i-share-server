@@ -9,7 +9,7 @@ import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
 import com.pingyueryou.ishare.security.JwtTokenUtil;
 import com.pingyueryou.ishare.security.UserEntity;
 import com.pingyueryou.ishare.service.UserService;
-import com.pingyueryou.ishare.utils.WxApi;
+import com.pingyueryou.ishare.service.WxApi;
 import com.pingyueryou.ishare.utils.XResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

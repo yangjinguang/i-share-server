@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.dbservice;
 
 import com.pingyueryou.ishare.entity.IItemCreateData;
+import com.pingyueryou.ishare.entity.IItemExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
 
@@ -23,6 +24,8 @@ public interface IItemDbService {
 
     List<IItemTag> getTags();
 
+    List<IItemTag> getTagsByItemId(Long itemId);
+
     IItemTag getTag(Long tagId);
 
     IItemTag updateTag(Long tagId, IItemTag tag);
@@ -32,4 +35,6 @@ public interface IItemDbService {
     Integer count(List<Long> classIds, Long tag);
 
     List<IItem> query(List<Long> classIds, Long tag, Integer offset, Integer size);
+
+    IItemExtra get(Long itemId);
 }

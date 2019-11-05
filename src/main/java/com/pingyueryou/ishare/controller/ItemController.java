@@ -2,10 +2,12 @@ package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IItemDbService;
 import com.pingyueryou.ishare.entity.IItemCreateData;
+import com.pingyueryou.ishare.entity.IItemExtra;
 import com.pingyueryou.ishare.entity.IUserExtra;
 import com.pingyueryou.ishare.entity.Pagination;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
+import com.pingyueryou.ishare.service.ItemService;
 import com.pingyueryou.ishare.service.UserService;
 import com.pingyueryou.ishare.utils.ErrorCode;
 import com.pingyueryou.ishare.utils.XResponse;
@@ -24,6 +26,8 @@ public class ItemController {
     private IItemDbService iItemDbService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ItemService itemService;
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity create(@RequestBody IItemCreateData createData) {
@@ -34,6 +38,12 @@ public class ItemController {
         createData.setUploadUserId(currentUser.getId());
         IItem iItem = iItemDbService.create(createData);
         return XResponse.ok(iItem);
+    }
+
+    @RequestMapping(path = "/{itemId}", method = RequestMethod.GET)
+    public ResponseEntity get(@PathVariable(value = "itemId") Long itemId) {
+        IItemExtra detail = itemService.detail(itemId);
+        return XResponse.ok(detail);
     }
 
     @RequestMapping(path = "/{itemId}", method = RequestMethod.PUT)
@@ -107,6 +117,7 @@ public class ItemController {
         }
         Integer total = iItemDbService.count(classIds, tagId);
         List<IItem> query = iItemDbService.query(classIds, tagId, offset, size);
+        itemService.serialize(query);
         return XResponse.ok(new Pagination(page, total, size), query);
     }
 
@@ -121,6 +132,7 @@ public class ItemController {
         List<Long> classIds = userService.getClassIds(currentUser.getId());
         Integer total = iItemDbService.count(classIds, null);
         List<IItem> query = iItemDbService.query(classIds, null, offset, size);
+        itemService.serialize(query);
         return XResponse.ok(new Pagination(page, total, size), query);
     }
 }

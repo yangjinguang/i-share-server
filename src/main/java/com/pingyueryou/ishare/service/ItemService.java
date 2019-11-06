@@ -9,4 +9,6 @@ public interface ItemService {
     void serialize(List<IItem> items);
 
     IItemExtra detail(Long itemId);
+
+    void lendOrder(Long itemId, Long userId, Long studentId);
 }

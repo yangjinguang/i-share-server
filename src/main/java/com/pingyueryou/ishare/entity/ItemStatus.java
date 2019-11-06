@@ -5,8 +5,7 @@ public enum ItemStatus {
     IN_LEND(2),
     LEND(3),
     IN_BACK(4),
-    BACK(5),
-    DISABLED(6);
+    DISABLED(5);
 
     private int index;
 

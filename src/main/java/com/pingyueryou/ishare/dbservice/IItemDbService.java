@@ -2,6 +2,7 @@ package com.pingyueryou.ishare.dbservice;
 
 import com.pingyueryou.ishare.entity.IItemCreateData;
 import com.pingyueryou.ishare.entity.IItemExtra;
+import com.pingyueryou.ishare.entity.ItemStatus;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
 
@@ -39,4 +40,6 @@ public interface IItemDbService {
     IItemExtra get(Long itemId);
 
     List<IItem> search(String s);
+
+    void changeStatus(Long itemId, ItemStatus status);
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.pingyueryou.ishare.jooq.tables.IStudent.I_STUDENT;
+import static com.pingyueryou.ishare.jooq.tables.IUserStudent.I_USER_STUDENT;
 
 @Service
 public class IStudentDbServiceImpl implements IStudentDbService {
@@ -68,5 +69,16 @@ public class IStudentDbServiceImpl implements IStudentDbService {
         context.deleteFrom(I_STUDENT)
                 .where(I_STUDENT.ID.eq(studentId))
                 .execute();
+    }
+
+    @Override
+    public List<IStudent> getByUserId(Long userId) {
+        return context.select(I_STUDENT.fields())
+                .from(I_USER_STUDENT)
+                .leftJoin(I_STUDENT)
+                .on(I_STUDENT.ID.eq(I_USER_STUDENT.STUDENT_ID))
+                .where(I_USER_STUDENT.USER_ID.eq(userId))
+                .fetch()
+                .into(IStudent.class);
     }
 }

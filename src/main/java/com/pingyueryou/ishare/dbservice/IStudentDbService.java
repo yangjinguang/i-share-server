@@ -14,4 +14,6 @@ public interface IStudentDbService {
     IStudent update(Long studentId, IStudent iStudent);
 
     void delete(Long studentId);
+
+    List<IStudent> getByUserId(Long userId);
 }

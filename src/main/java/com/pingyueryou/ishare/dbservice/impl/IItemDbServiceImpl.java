@@ -3,6 +3,7 @@ package com.pingyueryou.ishare.dbservice.impl;
 import com.pingyueryou.ishare.dbservice.IItemDbService;
 import com.pingyueryou.ishare.entity.IItemCreateData;
 import com.pingyueryou.ishare.entity.IItemExtra;
+import com.pingyueryou.ishare.entity.ItemStatus;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTagItem;
@@ -257,5 +258,13 @@ public class IItemDbServiceImpl implements IItemDbService {
                 .limit(20)
                 .fetch()
                 .into(IItem.class);
+    }
+
+    @Override
+    public void changeStatus(Long itemId, ItemStatus status) {
+        context.update(I_ITEM)
+                .set(I_ITEM.STATUS, status.getIndex())
+                .where(I_ITEM.ID.eq(itemId))
+                .execute();
     }
 }

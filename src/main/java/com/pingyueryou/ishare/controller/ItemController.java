@@ -1,10 +1,7 @@
 package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IItemDbService;
-import com.pingyueryou.ishare.entity.IItemCreateData;
-import com.pingyueryou.ishare.entity.IItemExtra;
-import com.pingyueryou.ishare.entity.IUserExtra;
-import com.pingyueryou.ishare.entity.Pagination;
+import com.pingyueryou.ishare.entity.*;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
 import com.pingyueryou.ishare.service.ItemService;
@@ -127,7 +124,7 @@ public class ItemController {
         return XResponse.ok(new Pagination(page, total, size), query);
     }
 
-    @RequestMapping(path = "/mgr", method = RequestMethod.GET)
+    @RequestMapping(path = "mgr", method = RequestMethod.GET)
     public ResponseEntity queryMgr(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                    @RequestParam(value = "size", defaultValue = "20") Integer size) {
         Integer offset = page - 1;
@@ -140,5 +137,17 @@ public class ItemController {
         List<IItem> query = iItemDbService.query(classIds, null, offset, size);
         itemService.serialize(query);
         return XResponse.ok(new Pagination(page, total, size), query);
+    }
+
+    @RequestMapping(path = "lend", method = RequestMethod.PUT)
+    public ResponseEntity lend(@RequestBody ItemLendOrderBody orderBody) {
+        Long itemId = orderBody.getItemId();
+        Long studentId = orderBody.getStudentId();
+        if (itemId == null || studentId == null) {
+            return XResponse.errorCode(ErrorCode.PARAM_ERROR);
+        }
+        IUserExtra currentUser = userService.getCurrentUser();
+        itemService.lendOrder(itemId, currentUser.getId(), studentId);
+        return XResponse.ok("success");
     }
 }

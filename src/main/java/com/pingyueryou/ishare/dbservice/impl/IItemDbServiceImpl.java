@@ -249,4 +249,13 @@ public class IItemDbServiceImpl implements IItemDbService {
         }
         return null;
     }
+
+    @Override
+    public List<IItem> search(String s) {
+        return context.selectFrom(I_ITEM)
+                .where(I_ITEM.TITLE.like("%" + s + "%"))
+                .limit(20)
+                .fetch()
+                .into(IItem.class);
+    }
 }

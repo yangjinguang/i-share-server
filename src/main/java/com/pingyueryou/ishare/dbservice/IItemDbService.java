@@ -37,4 +37,6 @@ public interface IItemDbService {
     List<IItem> query(List<Long> classIds, Long tag, Integer offset, Integer size);
 
     IItemExtra get(Long itemId);
+
+    List<IItem> search(String s);
 }

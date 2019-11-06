@@ -103,6 +103,12 @@ public class ItemController {
         return XResponse.ok("success");
     }
 
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    public ResponseEntity search(@RequestParam(value = "s") String s) {
+        List<IItem> search = iItemDbService.search(s);
+        return XResponse.ok(search);
+    }
+
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity query(@RequestParam(value = "classId", required = false) Long classId,
                                 @RequestParam(value = "tagId", required = false) Long tagId,

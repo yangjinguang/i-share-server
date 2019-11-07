@@ -51,17 +51,17 @@ public class IIdAuthOrderDbServiceImpl implements IIdAuthOrderDbService {
     }
 
     @Override
-    public Integer countParentOrders(List<Long> classIds) {
+    public Integer countParentOrders(List<Long> classIds, IdAuthOrderStatus status) {
         return context.selectCount().from(I_ID_AUTH_ORDER)
                 .where(I_ID_AUTH_ORDER.ROLE.eq(Role.PARENT.getIndex()))
                 .and(I_ID_AUTH_ORDER.CLASS_ID.in(classIds))
-                .and(I_ID_AUTH_ORDER.STATUS.eq(IdAuthOrderStatus.NEW.getIndex()))
+                .and(I_ID_AUTH_ORDER.STATUS.eq(status.getIndex()))
                 .fetchOne()
                 .into(Integer.class);
     }
 
     @Override
-    public List<IIdAuthOrderExtra> getParentOrders(List<Long> classIds) {
+    public List<IIdAuthOrderExtra> getParentOrders(List<Long> classIds, IdAuthOrderStatus status) {
         return context.select(I_ID_AUTH_ORDER.fields())
                 .select(I_USER.NICK_NAME.as("nickName"))
                 .from(I_ID_AUTH_ORDER)
@@ -69,7 +69,7 @@ public class IIdAuthOrderDbServiceImpl implements IIdAuthOrderDbService {
                 .on(I_USER.ID.eq(I_ID_AUTH_ORDER.USER_ID))
                 .where(I_ID_AUTH_ORDER.ROLE.eq(Role.PARENT.getIndex()))
                 .and(I_ID_AUTH_ORDER.CLASS_ID.in(classIds))
-                .and(I_ID_AUTH_ORDER.STATUS.eq(IdAuthOrderStatus.NEW.getIndex()))
+                .and(I_ID_AUTH_ORDER.STATUS.eq(status.getIndex()))
                 .fetch()
                 .into(IIdAuthOrderExtra.class);
     }

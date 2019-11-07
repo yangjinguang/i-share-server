@@ -11,4 +11,5 @@ public interface ItemService {
     IItemExtra detail(Long itemId);
 
     void lendOrder(Long itemId, Long userId, Long studentId);
+
 }

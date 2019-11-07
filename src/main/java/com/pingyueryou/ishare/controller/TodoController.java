@@ -3,9 +3,7 @@ package com.pingyueryou.ishare.controller;
 import com.pingyueryou.ishare.dbservice.IClassDbService;
 import com.pingyueryou.ishare.dbservice.IIdAuthOrderDbService;
 import com.pingyueryou.ishare.dbservice.IItemLendOrderDbService;
-import com.pingyueryou.ishare.entity.IIdAuthOrderExtra;
-import com.pingyueryou.ishare.entity.IUserExtra;
-import com.pingyueryou.ishare.jooq.tables.pojos.IItemLendOrder;
+import com.pingyueryou.ishare.entity.*;
 import com.pingyueryou.ishare.service.UserService;
 import com.pingyueryou.ishare.utils.XResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,8 @@ public class TodoController {
         }
         if (currentUser.isTeacher()) {
             List<Long> classIds = userService.getClassIds(userId);
-            count += iIdAuthOrderDbService.countParentOrders(classIds);
+            count += iIdAuthOrderDbService.countParentOrders(classIds, IdAuthOrderStatus.NEW);
+            count += iItemLendOrderDbService.countByClassIds(classIds, ItemLendOrderStatus.NEW);
         }
         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
         stringIntegerHashMap.put("count", count);
@@ -51,16 +50,16 @@ public class TodoController {
         IUserExtra currentUser = userService.getCurrentUser();
         Long userId = currentUser.getId();
         List<IIdAuthOrderExtra> iIdAuthOrders = new ArrayList<>();
-        List<IItemLendOrder> iItemLendOrders = new ArrayList<>();
+        List<IItemLendOrderExtra> iItemLendOrders = new ArrayList<>();
         if (currentUser.isAdmin()) {
             List<IIdAuthOrderExtra> orders = iIdAuthOrderDbService.getTeacherOrders();
             iIdAuthOrders.addAll(orders);
         }
         if (currentUser.isTeacher()) {
             List<Long> classIds = userService.getClassIds(userId);
-            List<IIdAuthOrderExtra> orders = iIdAuthOrderDbService.getParentOrders(classIds);
+            List<IIdAuthOrderExtra> orders = iIdAuthOrderDbService.getParentOrders(classIds, IdAuthOrderStatus.NEW);
             iIdAuthOrders.addAll(orders);
-            iItemLendOrders = iItemLendOrderDbService.getByClassIds(classIds);
+            iItemLendOrders = iItemLendOrderDbService.getByClassIds(classIds, ItemLendOrderStatus.NEW);
         }
         HashMap<String, Object> map = new HashMap<>();
         map.put("itemLendOrders", iItemLendOrders);

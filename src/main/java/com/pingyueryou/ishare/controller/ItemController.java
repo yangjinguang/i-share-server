@@ -1,9 +1,13 @@
 package com.pingyueryou.ishare.controller;
 
+import com.pingyueryou.ishare.dbservice.IClassDbService;
 import com.pingyueryou.ishare.dbservice.IItemDbService;
+import com.pingyueryou.ishare.dbservice.IItemLendOrderDbService;
+import com.pingyueryou.ishare.dbservice.IStudentDbService;
 import com.pingyueryou.ishare.entity.*;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
+import com.pingyueryou.ishare.jooq.tables.pojos.IStudent;
 import com.pingyueryou.ishare.service.ItemService;
 import com.pingyueryou.ishare.service.UserService;
 import com.pingyueryou.ishare.utils.ErrorCode;
@@ -25,6 +29,12 @@ public class ItemController {
     private UserService userService;
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private IItemLendOrderDbService iItemLendOrderDbService;
+    @Autowired
+    private IClassDbService iClassDbService;
+    @Autowired
+    private IStudentDbService iStudentDbService;
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity create(@RequestBody IItemCreateData createData) {
@@ -148,6 +158,40 @@ public class ItemController {
         }
         IUserExtra currentUser = userService.getCurrentUser();
         itemService.lendOrder(itemId, currentUser.getId(), studentId);
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "lend/detail/{orderId}", method = RequestMethod.GET)
+    public ResponseEntity lendDetail(@PathVariable(value = "orderId") Long orderId) {
+        IItemLendOrderExtra iItemLendOrderExtra = iItemLendOrderDbService.get(orderId);
+        if (iItemLendOrderExtra == null) {
+            return XResponse.errorCode(ErrorCode.PARAM_ERROR);
+        }
+        IItemExtra iItemExtra = iItemDbService.get(iItemLendOrderExtra.getItemId());
+        iItemLendOrderExtra.setiItem(iItemExtra);
+        IClassExtra iClassExtra = iClassDbService.get(iItemLendOrderExtra.getClassId());
+        iItemLendOrderExtra.setiClass(iClassExtra);
+        IStudent iStudent = iStudentDbService.get(iItemLendOrderExtra.getStudentId());
+        if (iStudent != null) {
+            IClassExtra studentClass = iClassDbService.get(iStudent.getClassId());
+            iItemLendOrderExtra.setStudentClass(studentClass);
+        }
+        iItemLendOrderExtra.setiStudent(iStudent);
+        return XResponse.ok(iItemLendOrderExtra);
+    }
+
+    @RequestMapping(path = "lend/handle", method = RequestMethod.PUT)
+    public ResponseEntity lendHandle(@RequestBody ItemLendOrderStatusBody body) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        if (!currentUser.isTeacher()) {
+            return XResponse.errorCode(ErrorCode.PARAM_ERROR);
+        }
+        Long orderId = body.getOrderId();
+        Boolean agree = body.getAgree();
+        if (orderId == null || agree == null) {
+            return XResponse.errorCode(ErrorCode.PARAM_ERROR);
+        }
+        iItemLendOrderDbService.changeStatus(orderId, agree ? ItemLendOrderStatus.AGREE : ItemLendOrderStatus.REJECT);
         return XResponse.ok("success");
     }
 }

@@ -14,6 +14,8 @@ public interface IClassDbService {
 
     IClassExtra get(Long classId);
 
+    List<IClassExtra> getAll();
+
     IGrade getGrade(Long gradeId);
 
     List<IClass> getByGradeId(Long gradeId);
@@ -35,6 +37,7 @@ public interface IClassDbService {
     IGrade updateGrade(Long gradeId, IGrade grade);
 
     void updateOrder(Long classId, Integer order);
+
     void updateGradeOrder(Long gradeId, Integer order);
 
 }

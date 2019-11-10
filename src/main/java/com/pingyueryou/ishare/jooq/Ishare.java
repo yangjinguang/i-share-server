@@ -12,6 +12,7 @@ import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IShareMedia;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
 import com.pingyueryou.ishare.jooq.tables.IUserClass;
@@ -42,7 +43,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Ishare extends SchemaImpl {
 
-    private static final long serialVersionUID = 381770306;
+    private static final long serialVersionUID = -469714727;
 
     /**
      * The reference instance of <code>ishare</code>
@@ -88,6 +89,11 @@ public class Ishare extends SchemaImpl {
      * The table <code>ishare.i_share</code>.
      */
     public final IShare I_SHARE = com.pingyueryou.ishare.jooq.tables.IShare.I_SHARE;
+
+    /**
+     * The table <code>ishare.i_share_media</code>.
+     */
+    public final IShareMedia I_SHARE_MEDIA = com.pingyueryou.ishare.jooq.tables.IShareMedia.I_SHARE_MEDIA;
 
     /**
      * The table <code>ishare.i_student</code>.
@@ -147,6 +153,7 @@ public class Ishare extends SchemaImpl {
             IItemTag.I_ITEM_TAG,
             IItemTagItem.I_ITEM_TAG_ITEM,
             IShare.I_SHARE,
+            IShareMedia.I_SHARE_MEDIA,
             IStudent.I_STUDENT,
             IUser.I_USER,
             IUserClass.I_USER_CLASS,

@@ -4,6 +4,7 @@ public class Pagination {
     private Integer total;
     private Integer page;
     private Integer size;
+    private boolean last;
 
     public Pagination() {
     }
@@ -12,6 +13,7 @@ public class Pagination {
         this.total = total;
         this.page = page;
         this.size = size;
+        this.last = total <= 0 || total <= size || (page - 1) * size >= total;
     }
 
     public Integer getTotal() {
@@ -36,5 +38,13 @@ public class Pagination {
 
     public void setSize(Integer size) {
         this.size = size;
+    }
+
+    public boolean isLast() {
+        return last;
+    }
+
+    public void setLast(boolean last) {
+        this.last = last;
     }
 }

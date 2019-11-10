@@ -73,17 +73,10 @@ public class IShareDao extends DAOImpl<IShareRecord, com.pingyueryou.ishare.jooq
     }
 
     /**
-     * Fetch records that have <code>media_url IN (values)</code>
+     * Fetch records that have <code>media_id IN (values)</code>
      */
-    public List<com.pingyueryou.ishare.jooq.tables.pojos.IShare> fetchByMediaUrl(String... values) {
-        return fetch(IShare.I_SHARE.MEDIA_URL, values);
-    }
-
-    /**
-     * Fetch records that have <code>media_type IN (values)</code>
-     */
-    public List<com.pingyueryou.ishare.jooq.tables.pojos.IShare> fetchByMediaType(Integer... values) {
-        return fetch(IShare.I_SHARE.MEDIA_TYPE, values);
+    public List<com.pingyueryou.ishare.jooq.tables.pojos.IShare> fetchByMediaId(Long... values) {
+        return fetch(IShare.I_SHARE.MEDIA_ID, values);
     }
 
     /**
@@ -94,17 +87,17 @@ public class IShareDao extends DAOImpl<IShareRecord, com.pingyueryou.ishare.jooq
     }
 
     /**
-     * Fetch records that have <code>class_id IN (values)</code>
-     */
-    public List<com.pingyueryou.ishare.jooq.tables.pojos.IShare> fetchByClassId(Long... values) {
-        return fetch(IShare.I_SHARE.CLASS_ID, values);
-    }
-
-    /**
      * Fetch records that have <code>item_id IN (values)</code>
      */
     public List<com.pingyueryou.ishare.jooq.tables.pojos.IShare> fetchByItemId(Long... values) {
         return fetch(IShare.I_SHARE.ITEM_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>student_id IN (values)</code>
+     */
+    public List<com.pingyueryou.ishare.jooq.tables.pojos.IShare> fetchByStudentId(Long... values) {
+        return fetch(IShare.I_SHARE.STUDENT_ID, values);
     }
 
     /**

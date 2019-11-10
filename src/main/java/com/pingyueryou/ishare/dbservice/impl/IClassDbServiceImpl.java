@@ -57,6 +57,17 @@ public class IClassDbServiceImpl implements IClassDbService {
     }
 
     @Override
+    public List<IClassExtra> getAll() {
+        return context.select(I_CLASS.fields())
+                .select(I_GRADE.NAME.as("grade_name"))
+                .from(I_CLASS)
+                .leftJoin(I_GRADE)
+                .on(I_GRADE.ID.eq(I_CLASS.GRADE_ID))
+                .fetch()
+                .into(IClassExtra.class);
+    }
+
+    @Override
     public IGrade getGrade(Long gradeId) {
         IGradeRecord iGradeRecord = context.selectFrom(I_GRADE)
                 .where(I_GRADE.ID.eq(gradeId))

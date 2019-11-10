@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IClassDbService;
+import com.pingyueryou.ishare.entity.IClassExtra;
 import com.pingyueryou.ishare.entity.IGradeExtra;
 import com.pingyueryou.ishare.entity.IUserExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
@@ -47,6 +48,12 @@ public class ClassController {
         IClass resIClass = iClassDbService.create(iClass);
 
         return XResponse.ok(resIClass);
+    }
+
+    @RequestMapping(path = "", method = RequestMethod.GET)
+    public ResponseEntity getAll() {
+        List<IClassExtra> all = iClassDbService.getAll();
+        return XResponse.ok(all);
     }
 
     @RequestMapping(path = "/{classId}", method = RequestMethod.GET)

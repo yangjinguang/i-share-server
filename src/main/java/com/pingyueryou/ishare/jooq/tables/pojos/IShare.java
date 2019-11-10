@@ -23,15 +23,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IShare implements Serializable {
 
-    private static final long serialVersionUID = 1395014127;
+    private static final long serialVersionUID = 1651259166;
 
     private Long      id;
     private String    title;
-    private String    mediaUrl;
-    private Integer   mediaType;
+    private Long      mediaId;
     private Long      uploadUserId;
-    private Long      classId;
     private Long      itemId;
+    private Long      studentId;
     private String    desc;
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -41,11 +40,10 @@ public class IShare implements Serializable {
     public IShare(IShare value) {
         this.id = value.id;
         this.title = value.title;
-        this.mediaUrl = value.mediaUrl;
-        this.mediaType = value.mediaType;
+        this.mediaId = value.mediaId;
         this.uploadUserId = value.uploadUserId;
-        this.classId = value.classId;
         this.itemId = value.itemId;
+        this.studentId = value.studentId;
         this.desc = value.desc;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
@@ -54,22 +52,20 @@ public class IShare implements Serializable {
     public IShare(
         Long      id,
         String    title,
-        String    mediaUrl,
-        Integer   mediaType,
+        Long      mediaId,
         Long      uploadUserId,
-        Long      classId,
         Long      itemId,
+        Long      studentId,
         String    desc,
         Timestamp createdAt,
         Timestamp updatedAt
     ) {
         this.id = id;
         this.title = title;
-        this.mediaUrl = mediaUrl;
-        this.mediaType = mediaType;
+        this.mediaId = mediaId;
         this.uploadUserId = uploadUserId;
-        this.classId = classId;
         this.itemId = itemId;
+        this.studentId = studentId;
         this.desc = desc;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -91,20 +87,12 @@ public class IShare implements Serializable {
         this.title = title;
     }
 
-    public String getMediaUrl() {
-        return this.mediaUrl;
+    public Long getMediaId() {
+        return this.mediaId;
     }
 
-    public void setMediaUrl(String mediaUrl) {
-        this.mediaUrl = mediaUrl;
-    }
-
-    public Integer getMediaType() {
-        return this.mediaType;
-    }
-
-    public void setMediaType(Integer mediaType) {
-        this.mediaType = mediaType;
+    public void setMediaId(Long mediaId) {
+        this.mediaId = mediaId;
     }
 
     public Long getUploadUserId() {
@@ -115,20 +103,20 @@ public class IShare implements Serializable {
         this.uploadUserId = uploadUserId;
     }
 
-    public Long getClassId() {
-        return this.classId;
-    }
-
-    public void setClassId(Long classId) {
-        this.classId = classId;
-    }
-
     public Long getItemId() {
         return this.itemId;
     }
 
     public void setItemId(Long itemId) {
         this.itemId = itemId;
+    }
+
+    public Long getStudentId() {
+        return this.studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public String getDesc() {
@@ -161,11 +149,10 @@ public class IShare implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(title);
-        sb.append(", ").append(mediaUrl);
-        sb.append(", ").append(mediaType);
+        sb.append(", ").append(mediaId);
         sb.append(", ").append(uploadUserId);
-        sb.append(", ").append(classId);
         sb.append(", ").append(itemId);
+        sb.append(", ").append(studentId);
         sb.append(", ").append(desc);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);

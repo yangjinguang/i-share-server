@@ -12,6 +12,7 @@ import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IShareMedia;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
 import com.pingyueryou.ishare.jooq.tables.IUserClass;
@@ -51,6 +52,7 @@ public class Indexes {
     public static final Index I_ITEM_TAG_ITEM_PRIMARY = Indexes0.I_ITEM_TAG_ITEM_PRIMARY;
     public static final Index I_ITEM_TAG_ITEM_UK_ITEM_TAG_ID = Indexes0.I_ITEM_TAG_ITEM_UK_ITEM_TAG_ID;
     public static final Index I_SHARE_PRIMARY = Indexes0.I_SHARE_PRIMARY;
+    public static final Index I_SHARE_MEDIA_PRIMARY = Indexes0.I_SHARE_MEDIA_PRIMARY;
     public static final Index I_STUDENT_PRIMARY = Indexes0.I_STUDENT_PRIMARY;
     public static final Index I_USER_PRIMARY = Indexes0.I_USER_PRIMARY;
     public static final Index I_USER_UK_OPEN_ID = Indexes0.I_USER_UK_OPEN_ID;
@@ -75,6 +77,7 @@ public class Indexes {
         public static Index I_ITEM_TAG_ITEM_PRIMARY = Internal.createIndex("PRIMARY", IItemTagItem.I_ITEM_TAG_ITEM, new OrderField[] { IItemTagItem.I_ITEM_TAG_ITEM.ID }, true);
         public static Index I_ITEM_TAG_ITEM_UK_ITEM_TAG_ID = Internal.createIndex("uk_item_tag_id", IItemTagItem.I_ITEM_TAG_ITEM, new OrderField[] { IItemTagItem.I_ITEM_TAG_ITEM.ITEM_ID, IItemTagItem.I_ITEM_TAG_ITEM.TAG_ID }, true);
         public static Index I_SHARE_PRIMARY = Internal.createIndex("PRIMARY", IShare.I_SHARE, new OrderField[] { IShare.I_SHARE.ID }, true);
+        public static Index I_SHARE_MEDIA_PRIMARY = Internal.createIndex("PRIMARY", IShareMedia.I_SHARE_MEDIA, new OrderField[] { IShareMedia.I_SHARE_MEDIA.ID }, true);
         public static Index I_STUDENT_PRIMARY = Internal.createIndex("PRIMARY", IStudent.I_STUDENT, new OrderField[] { IStudent.I_STUDENT.ID }, true);
         public static Index I_USER_PRIMARY = Internal.createIndex("PRIMARY", IUser.I_USER, new OrderField[] { IUser.I_USER.ID }, true);
         public static Index I_USER_UK_OPEN_ID = Internal.createIndex("uk_open_id", IUser.I_USER, new OrderField[] { IUser.I_USER.OPEN_ID }, true);

@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IShare extends TableImpl<IShareRecord> {
 
-    private static final long serialVersionUID = 1214935058;
+    private static final long serialVersionUID = 886867805;
 
     /**
      * The reference instance of <code>ishare.i_share</code>
@@ -66,14 +66,9 @@ public class IShare extends TableImpl<IShareRecord> {
     public final TableField<IShareRecord, String> TITLE = createField("title", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>ishare.i_share.media_url</code>.
+     * The column <code>ishare.i_share.media_id</code>.
      */
-    public final TableField<IShareRecord, String> MEDIA_URL = createField("media_url", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
-
-    /**
-     * The column <code>ishare.i_share.media_type</code>.
-     */
-    public final TableField<IShareRecord, Integer> MEDIA_TYPE = createField("media_type", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<IShareRecord, Long> MEDIA_ID = createField("media_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>ishare.i_share.upload_user_id</code>.
@@ -81,14 +76,14 @@ public class IShare extends TableImpl<IShareRecord> {
     public final TableField<IShareRecord, Long> UPLOAD_USER_ID = createField("upload_user_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>ishare.i_share.class_id</code>.
-     */
-    public final TableField<IShareRecord, Long> CLASS_ID = createField("class_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
      * The column <code>ishare.i_share.item_id</code>.
      */
     public final TableField<IShareRecord, Long> ITEM_ID = createField("item_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * The column <code>ishare.i_share.student_id</code>.
+     */
+    public final TableField<IShareRecord, Long> STUDENT_ID = createField("student_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>ishare.i_share.desc</code>.

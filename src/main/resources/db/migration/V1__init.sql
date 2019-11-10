@@ -114,11 +114,10 @@ CREATE TABLE `i_share`
 (
     `id`             bigint(20)   NOT NULL AUTO_INCREMENT,
     `title`          varchar(255) NOT NULL DEFAULT '',
-    `media_url`      varchar(255) NOT NULL DEFAULT '',
-    `media_type`     tinyint(4)   NOT NULL,
+    `media_id`       bigint(20)   NOT NULL,
     `upload_user_id` bigint(20)   NOT NULL,
-    `class_id`       bigint(20)   NOT NULL,
     `item_id`        bigint(20)   NOT NULL,
+    `student_id`     bigint(20)   NOT NULL,
     `desc`           varchar(500) NOT NULL DEFAULT '',
     `created_at`     timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`     timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -164,6 +163,20 @@ CREATE TABLE `i_item_lend_order`
     `status`     tinyint(4) NOT NULL DEFAULT '1',
     `created_at` timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `i_share_media`
+(
+    `id`         bigint(20)   NOT NULL AUTO_INCREMENT,
+    `path`       varchar(255) NOT NULL DEFAULT '',
+    `duration`   int(11)      NOT NULL DEFAULT '0',
+    `size`       int(11)      NOT NULL DEFAULT '0',
+    `width`      int(11)      NOT NULL DEFAULT '0',
+    `height`     int(11)      NOT NULL DEFAULT '0',
+    `created_at` timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;

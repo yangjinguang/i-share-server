@@ -12,6 +12,7 @@ import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IShareMedia;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
 import com.pingyueryou.ishare.jooq.tables.IUserClass;
@@ -73,6 +74,11 @@ public class Tables {
      * The table <code>ishare.i_share</code>.
      */
     public static final IShare I_SHARE = com.pingyueryou.ishare.jooq.tables.IShare.I_SHARE;
+
+    /**
+     * The table <code>ishare.i_share_media</code>.
+     */
+    public static final IShareMedia I_SHARE_MEDIA = com.pingyueryou.ishare.jooq.tables.IShareMedia.I_SHARE_MEDIA;
 
     /**
      * The table <code>ishare.i_student</code>.

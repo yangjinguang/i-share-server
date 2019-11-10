@@ -12,6 +12,7 @@ import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IShareMedia;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
 import com.pingyueryou.ishare.jooq.tables.IUserClass;
@@ -24,6 +25,7 @@ import com.pingyueryou.ishare.jooq.tables.records.IItemLendOrderRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemTagItemRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemTagRecord;
+import com.pingyueryou.ishare.jooq.tables.records.IShareMediaRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IShareRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IStudentRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IUserClassRecord;
@@ -64,6 +66,7 @@ public class Keys {
     public static final Identity<IItemTagRecord, Long> IDENTITY_I_ITEM_TAG = Identities0.IDENTITY_I_ITEM_TAG;
     public static final Identity<IItemTagItemRecord, Long> IDENTITY_I_ITEM_TAG_ITEM = Identities0.IDENTITY_I_ITEM_TAG_ITEM;
     public static final Identity<IShareRecord, Long> IDENTITY_I_SHARE = Identities0.IDENTITY_I_SHARE;
+    public static final Identity<IShareMediaRecord, Long> IDENTITY_I_SHARE_MEDIA = Identities0.IDENTITY_I_SHARE_MEDIA;
     public static final Identity<IStudentRecord, Long> IDENTITY_I_STUDENT = Identities0.IDENTITY_I_STUDENT;
     public static final Identity<IUserRecord, Long> IDENTITY_I_USER = Identities0.IDENTITY_I_USER;
     public static final Identity<IUserClassRecord, Long> IDENTITY_I_USER_CLASS = Identities0.IDENTITY_I_USER_CLASS;
@@ -83,6 +86,7 @@ public class Keys {
     public static final UniqueKey<IItemTagItemRecord> KEY_I_ITEM_TAG_ITEM_PRIMARY = UniqueKeys0.KEY_I_ITEM_TAG_ITEM_PRIMARY;
     public static final UniqueKey<IItemTagItemRecord> KEY_I_ITEM_TAG_ITEM_UK_ITEM_TAG_ID = UniqueKeys0.KEY_I_ITEM_TAG_ITEM_UK_ITEM_TAG_ID;
     public static final UniqueKey<IShareRecord> KEY_I_SHARE_PRIMARY = UniqueKeys0.KEY_I_SHARE_PRIMARY;
+    public static final UniqueKey<IShareMediaRecord> KEY_I_SHARE_MEDIA_PRIMARY = UniqueKeys0.KEY_I_SHARE_MEDIA_PRIMARY;
     public static final UniqueKey<IStudentRecord> KEY_I_STUDENT_PRIMARY = UniqueKeys0.KEY_I_STUDENT_PRIMARY;
     public static final UniqueKey<IUserRecord> KEY_I_USER_PRIMARY = UniqueKeys0.KEY_I_USER_PRIMARY;
     public static final UniqueKey<IUserRecord> KEY_I_USER_UK_OPEN_ID = UniqueKeys0.KEY_I_USER_UK_OPEN_ID;
@@ -111,6 +115,7 @@ public class Keys {
         public static Identity<IItemTagRecord, Long> IDENTITY_I_ITEM_TAG = Internal.createIdentity(IItemTag.I_ITEM_TAG, IItemTag.I_ITEM_TAG.ID);
         public static Identity<IItemTagItemRecord, Long> IDENTITY_I_ITEM_TAG_ITEM = Internal.createIdentity(IItemTagItem.I_ITEM_TAG_ITEM, IItemTagItem.I_ITEM_TAG_ITEM.ID);
         public static Identity<IShareRecord, Long> IDENTITY_I_SHARE = Internal.createIdentity(IShare.I_SHARE, IShare.I_SHARE.ID);
+        public static Identity<IShareMediaRecord, Long> IDENTITY_I_SHARE_MEDIA = Internal.createIdentity(IShareMedia.I_SHARE_MEDIA, IShareMedia.I_SHARE_MEDIA.ID);
         public static Identity<IStudentRecord, Long> IDENTITY_I_STUDENT = Internal.createIdentity(IStudent.I_STUDENT, IStudent.I_STUDENT.ID);
         public static Identity<IUserRecord, Long> IDENTITY_I_USER = Internal.createIdentity(IUser.I_USER, IUser.I_USER.ID);
         public static Identity<IUserClassRecord, Long> IDENTITY_I_USER_CLASS = Internal.createIdentity(IUserClass.I_USER_CLASS, IUserClass.I_USER_CLASS.ID);
@@ -128,6 +133,7 @@ public class Keys {
         public static final UniqueKey<IItemTagItemRecord> KEY_I_ITEM_TAG_ITEM_PRIMARY = Internal.createUniqueKey(IItemTagItem.I_ITEM_TAG_ITEM, "KEY_i_item_tag_item_PRIMARY", IItemTagItem.I_ITEM_TAG_ITEM.ID);
         public static final UniqueKey<IItemTagItemRecord> KEY_I_ITEM_TAG_ITEM_UK_ITEM_TAG_ID = Internal.createUniqueKey(IItemTagItem.I_ITEM_TAG_ITEM, "KEY_i_item_tag_item_uk_item_tag_id", IItemTagItem.I_ITEM_TAG_ITEM.ITEM_ID, IItemTagItem.I_ITEM_TAG_ITEM.TAG_ID);
         public static final UniqueKey<IShareRecord> KEY_I_SHARE_PRIMARY = Internal.createUniqueKey(IShare.I_SHARE, "KEY_i_share_PRIMARY", IShare.I_SHARE.ID);
+        public static final UniqueKey<IShareMediaRecord> KEY_I_SHARE_MEDIA_PRIMARY = Internal.createUniqueKey(IShareMedia.I_SHARE_MEDIA, "KEY_i_share_media_PRIMARY", IShareMedia.I_SHARE_MEDIA.ID);
         public static final UniqueKey<IStudentRecord> KEY_I_STUDENT_PRIMARY = Internal.createUniqueKey(IStudent.I_STUDENT, "KEY_i_student_PRIMARY", IStudent.I_STUDENT.ID);
         public static final UniqueKey<IUserRecord> KEY_I_USER_PRIMARY = Internal.createUniqueKey(IUser.I_USER, "KEY_i_user_PRIMARY", IUser.I_USER.ID);
         public static final UniqueKey<IUserRecord> KEY_I_USER_UK_OPEN_ID = Internal.createUniqueKey(IUser.I_USER, "KEY_i_user_uk_open_id", IUser.I_USER.OPEN_ID);

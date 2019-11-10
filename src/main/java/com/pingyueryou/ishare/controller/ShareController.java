@@ -1,10 +1,7 @@
 package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IShareDbService;
-import com.pingyueryou.ishare.entity.IShareExtra;
-import com.pingyueryou.ishare.entity.IUserExtra;
-import com.pingyueryou.ishare.entity.PaginationList;
-import com.pingyueryou.ishare.entity.ShareCreateBody;
+import com.pingyueryou.ishare.entity.*;
 import com.pingyueryou.ishare.jooq.tables.pojos.IShare;
 import com.pingyueryou.ishare.jooq.tables.pojos.IShareMedia;
 import com.pingyueryou.ishare.service.ShareService;
@@ -15,6 +12,8 @@ import com.pingyueryou.ishare.utils.XStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/share")
@@ -50,5 +49,31 @@ public class ShareController {
         }
         IShare iShare = shareService.create(itemId, studentId, userId, media, body.getDesc());
         return XResponse.ok(iShare);
+    }
+
+    @RequestMapping(path = "{shareId}/like", method = RequestMethod.PUT)
+    public ResponseEntity like(@PathVariable(value = "shareId") Long shareId) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        shareService.like(shareId, currentUser.getId());
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "{shareId}/like", method = RequestMethod.GET)
+    public ResponseEntity getLikes(@PathVariable(value = "shareId") Long shareId) {
+        List<IShareLikeExtra> likes = shareService.getLike(shareId);
+        return XResponse.ok(likes);
+    }
+
+    @RequestMapping(path = "{shareId}/comment", method = RequestMethod.PUT)
+    public ResponseEntity comment(@PathVariable(value = "shareId") Long shareId, @RequestBody ShareCommentBody body) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        shareService.comment(shareId, currentUser.getId(), body.getComment());
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "{shareId}/comment", method = RequestMethod.GET)
+    public ResponseEntity getComments(@PathVariable(value = "shareId") Long shareId) {
+        List<IShareCommentExtra> comments = shareService.getComment(shareId);
+        return XResponse.ok(comments);
     }
 }

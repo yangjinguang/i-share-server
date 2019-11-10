@@ -4,6 +4,8 @@ package com.pingyueryou.ishare.entity;
 import com.pingyueryou.ishare.jooq.tables.pojos.IShare;
 import com.pingyueryou.ishare.jooq.tables.pojos.IShareMedia;
 
+import java.util.List;
+
 public class IShareExtra extends IShare {
     private String uploadUserName;
     private String uploadUserAvatarUrl;
@@ -13,6 +15,8 @@ public class IShareExtra extends IShare {
     private String itemTitle;
     private String itemCoverUrl;
     private IShareMedia media;
+    private List<IShareLikeExtra> likes;
+    private List<IShareCommentExtra> comments;
 
     public IShareExtra() {
     }
@@ -83,5 +87,21 @@ public class IShareExtra extends IShare {
 
     public void setMedia(IShareMedia media) {
         this.media = media;
+    }
+
+    public List<IShareLikeExtra> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<IShareLikeExtra> likes) {
+        this.likes = likes;
+    }
+
+    public List<IShareCommentExtra> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<IShareCommentExtra> comments) {
+        this.comments = comments;
     }
 }

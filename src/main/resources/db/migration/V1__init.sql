@@ -181,6 +181,30 @@ CREATE TABLE `i_share_media`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
+CREATE TABLE `i_share_like`
+(
+    `id`         bigint(20) NOT NULL AUTO_INCREMENT,
+    `share_id`   bigint(20) NOT NULL,
+    `user_id`    bigint(20) NOT NULL,
+    `created_at` timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_share_user_id` (`user_id`, `share_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `i_share_comment`
+(
+    `id`         bigint(20)    NOT NULL AUTO_INCREMENT,
+    `share_id`   bigint(20)    NOT NULL,
+    `user_id`    bigint(20)    NOT NULL,
+    `comment`    varchar(1000) NOT NULL,
+    `created_at` timestamp     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` timestamp     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
 INSERT INTO `i_grade` (`name`)
 VALUES ('大班');
 

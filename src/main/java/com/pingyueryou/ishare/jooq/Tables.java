@@ -12,6 +12,8 @@ import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IShareComment;
+import com.pingyueryou.ishare.jooq.tables.IShareLike;
 import com.pingyueryou.ishare.jooq.tables.IShareMedia;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
@@ -74,6 +76,16 @@ public class Tables {
      * The table <code>ishare.i_share</code>.
      */
     public static final IShare I_SHARE = com.pingyueryou.ishare.jooq.tables.IShare.I_SHARE;
+
+    /**
+     * The table <code>ishare.i_share_comment</code>.
+     */
+    public static final IShareComment I_SHARE_COMMENT = com.pingyueryou.ishare.jooq.tables.IShareComment.I_SHARE_COMMENT;
+
+    /**
+     * The table <code>ishare.i_share_like</code>.
+     */
+    public static final IShareLike I_SHARE_LIKE = com.pingyueryou.ishare.jooq.tables.IShareLike.I_SHARE_LIKE;
 
     /**
      * The table <code>ishare.i_share_media</code>.

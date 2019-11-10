@@ -12,6 +12,8 @@ import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
 import com.pingyueryou.ishare.jooq.tables.IItemTagItem;
 import com.pingyueryou.ishare.jooq.tables.IShare;
+import com.pingyueryou.ishare.jooq.tables.IShareComment;
+import com.pingyueryou.ishare.jooq.tables.IShareLike;
 import com.pingyueryou.ishare.jooq.tables.IShareMedia;
 import com.pingyueryou.ishare.jooq.tables.IStudent;
 import com.pingyueryou.ishare.jooq.tables.IUser;
@@ -43,7 +45,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Ishare extends SchemaImpl {
 
-    private static final long serialVersionUID = -469714727;
+    private static final long serialVersionUID = -1508119091;
 
     /**
      * The reference instance of <code>ishare</code>
@@ -89,6 +91,16 @@ public class Ishare extends SchemaImpl {
      * The table <code>ishare.i_share</code>.
      */
     public final IShare I_SHARE = com.pingyueryou.ishare.jooq.tables.IShare.I_SHARE;
+
+    /**
+     * The table <code>ishare.i_share_comment</code>.
+     */
+    public final IShareComment I_SHARE_COMMENT = com.pingyueryou.ishare.jooq.tables.IShareComment.I_SHARE_COMMENT;
+
+    /**
+     * The table <code>ishare.i_share_like</code>.
+     */
+    public final IShareLike I_SHARE_LIKE = com.pingyueryou.ishare.jooq.tables.IShareLike.I_SHARE_LIKE;
 
     /**
      * The table <code>ishare.i_share_media</code>.
@@ -153,6 +165,8 @@ public class Ishare extends SchemaImpl {
             IItemTag.I_ITEM_TAG,
             IItemTagItem.I_ITEM_TAG_ITEM,
             IShare.I_SHARE,
+            IShareComment.I_SHARE_COMMENT,
+            IShareLike.I_SHARE_LIKE,
             IShareMedia.I_SHARE_MEDIA,
             IStudent.I_STUDENT,
             IUser.I_USER,

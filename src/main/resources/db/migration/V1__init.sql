@@ -79,7 +79,7 @@ CREATE TABLE `i_item`
     `title`          varchar(255) NOT NULL DEFAULT '',
     `cover_url`      varchar(255) NOT NULL DEFAULT '',
     `desc`           varchar(500) NOT NULL DEFAULT '',
-    `status`         tinyint(4)   NOT NULL DEFAULT '0',
+    `status`         tinyint(4)   NOT NULL DEFAULT '1',
     `upload_user_id` bigint(20)   NOT NULL,
     `class_id`       bigint(20)   NOT NULL,
     `created_at`     timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -134,7 +134,7 @@ CREATE TABLE `i_id_auth_order`
     `class_id`     bigint(20)   NOT NULL,
     `student_name` varchar(255) NOT NULL DEFAULT '',
     `relation`     varchar(255) NOT NULL DEFAULT '',
-    `status`       tinyint(4)   NOT NULL DEFAULT '0',
+    `status`       tinyint(4)   NOT NULL DEFAULT '1',
     `created_at`   timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at`   timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
@@ -161,7 +161,7 @@ CREATE TABLE `i_item_lend_order`
     `item_id`    bigint(20) NOT NULL,
     `class_id`   bigint(20) NOT NULL,
     `student_id` bigint(20) NOT NULL,
-    `status`     tinyint(4) NOT NULL DEFAULT '0',
+    `status`     tinyint(4) NOT NULL DEFAULT '1',
     `created_at` timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)

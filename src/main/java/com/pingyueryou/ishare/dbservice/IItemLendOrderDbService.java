@@ -9,14 +9,17 @@ import java.util.List;
 public interface IItemLendOrderDbService {
     IItemLendOrder create(IItemLendOrder order);
 
-    Integer countByClassId(Long classId,ItemLendOrderStatus status);
+    Integer countByClassId(Long classId, List<Integer> statusList);
 
-    Integer countByClassIds(List<Long> classIds,ItemLendOrderStatus status);
+    Integer countByClassIds(List<Long> classIds, List<Integer> statusList);
 
-    List<IItemLendOrderExtra> getByClassIds(List<Long> classIds, ItemLendOrderStatus status);
+    List<IItemLendOrderExtra> getByClassIds(List<Long> classIds, List<Integer> statusList);
 
     IItemLendOrderExtra get(Long orderId);
 
     void changeStatus(Long orderId, ItemLendOrderStatus status);
 
+    Integer countByUserId(Long userId, List<Integer> statusList);
+
+    List<IItemLendOrderExtra> queryByUserId(Long userId, List<Integer> statusList, Integer offset, Integer size);
 }

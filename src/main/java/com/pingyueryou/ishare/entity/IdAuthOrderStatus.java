@@ -1,10 +1,10 @@
 package com.pingyueryou.ishare.entity;
 
 public enum IdAuthOrderStatus {
-    NEW(0),
-    AGREE(1),
-    REJECT(2),
-    CANCELED(3);
+    NEW(1),
+    AGREE(2),
+    REJECT(3),
+    CANCELED(4);
     private int index;
 
     IdAuthOrderStatus(int index) {

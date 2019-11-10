@@ -38,7 +38,10 @@ public class TodoController {
         if (currentUser.isTeacher()) {
             List<Long> classIds = userService.getClassIds(userId);
             count += iIdAuthOrderDbService.countParentOrders(classIds, IdAuthOrderStatus.NEW);
-            count += iItemLendOrderDbService.countByClassIds(classIds, ItemLendOrderStatus.NEW);
+            ArrayList<Integer> statusList = new ArrayList<>();
+            statusList.add(ItemLendOrderStatus.NEW.getIndex());
+            statusList.add(ItemLendOrderStatus.IN_RETURN.getIndex());
+            count += iItemLendOrderDbService.countByClassIds(classIds, statusList);
         }
         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
         stringIntegerHashMap.put("count", count);
@@ -59,7 +62,10 @@ public class TodoController {
             List<Long> classIds = userService.getClassIds(userId);
             List<IIdAuthOrderExtra> orders = iIdAuthOrderDbService.getParentOrders(classIds, IdAuthOrderStatus.NEW);
             iIdAuthOrders.addAll(orders);
-            iItemLendOrders = iItemLendOrderDbService.getByClassIds(classIds, ItemLendOrderStatus.NEW);
+            ArrayList<Integer> statusList = new ArrayList<>();
+            statusList.add(ItemLendOrderStatus.NEW.getIndex());
+            statusList.add(ItemLendOrderStatus.IN_RETURN.getIndex());
+            iItemLendOrders = iItemLendOrderDbService.getByClassIds(classIds, statusList);
         }
         HashMap<String, Object> map = new HashMap<>();
         map.put("itemLendOrders", iItemLendOrders);

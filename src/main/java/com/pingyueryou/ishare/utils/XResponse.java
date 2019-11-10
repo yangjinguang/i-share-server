@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.utils;
 
 import com.pingyueryou.ishare.entity.Pagination;
+import com.pingyueryou.ishare.entity.PaginationList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -30,6 +31,15 @@ public class XResponse {
         Map<String, Object> body = bodyBuild(200, null, listMap);
         return ResponseEntity.ok(body);
     }
+
+    public static ResponseEntity ok(PaginationList list) {
+        HashMap<String, Object> listMap = new HashMap<>();
+        listMap.put("pagination", list.getPagination());
+        listMap.put("list", list.getList());
+        Map<String, Object> body = bodyBuild(200, null, listMap);
+        return ResponseEntity.ok(body);
+    }
+
 
     public static ResponseEntity badRequest(String message) {
         Map<String, Object> body = bodyBuild(400, message, null);

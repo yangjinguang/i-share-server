@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IIdAuthOrder extends TableImpl<IIdAuthOrderRecord> {
 
-    private static final long serialVersionUID = -405206420;
+    private static final long serialVersionUID = -1065098293;
 
     /**
      * The reference instance of <code>ishare.i_id_auth_order</code>
@@ -88,7 +88,7 @@ public class IIdAuthOrder extends TableImpl<IIdAuthOrderRecord> {
     /**
      * The column <code>ishare.i_id_auth_order.status</code>.
      */
-    public final TableField<IIdAuthOrderRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+    public final TableField<IIdAuthOrderRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("1", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>ishare.i_id_auth_order.created_at</code>.

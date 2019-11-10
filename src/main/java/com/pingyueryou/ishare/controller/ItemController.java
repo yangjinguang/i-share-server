@@ -191,7 +191,68 @@ public class ItemController {
         if (orderId == null || agree == null) {
             return XResponse.errorCode(ErrorCode.PARAM_ERROR);
         }
-        iItemLendOrderDbService.changeStatus(orderId, agree ? ItemLendOrderStatus.AGREE : ItemLendOrderStatus.REJECT);
+
+        itemService.lendOrderHandle(orderId, agree);
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "lend/my", method = RequestMethod.GET)
+    public ResponseEntity getMyLendOrders(@RequestParam(value = "status", required = false) String status,
+                                          @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                          @RequestParam(value = "page", defaultValue = "20") Integer size) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        Long userId = currentUser.getId();
+        List<Integer> statusList = new ArrayList<>();
+        if (!XStringUtils.isEmpty(status)) {
+            String[] statusArr = status.split(",");
+            for (String s : statusArr) {
+                statusList.add(Integer.parseInt(s));
+            }
+        }
+        PaginationList<IItemLendOrderExtra> lendOrdersByUserId = itemService.getLendOrdersByUserId(userId, statusList, page, size);
+        return XResponse.ok(lendOrdersByUserId);
+    }
+
+    @RequestMapping(path = "lend/return/{orderId}", method = RequestMethod.PUT)
+    public ResponseEntity lendReturn(@PathVariable(value = "orderId") Long orderId) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        Long userId = currentUser.getId();
+        IItemLendOrderExtra iItemLendOrderExtra = iItemLendOrderDbService.get(orderId);
+        if (!iItemLendOrderExtra.getUserId().equals(userId)) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        iItemLendOrderDbService.changeStatus(orderId, ItemLendOrderStatus.IN_RETURN);
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "lend/cancel/{orderId}", method = RequestMethod.PUT)
+    public ResponseEntity lendCancel(@PathVariable(value = "orderId") Long orderId) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        Long userId = currentUser.getId();
+        IItemLendOrderExtra iItemLendOrderExtra = iItemLendOrderDbService.get(orderId);
+        if (!iItemLendOrderExtra.getUserId().equals(userId)) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        if (!iItemLendOrderExtra.getStatus().equals(ItemLendOrderStatus.NEW.getIndex())) {
+            return XResponse.errorCode(ErrorCode.LEND_CANCEL_STATUS_NOT_MATCH);
+        }
+        iItemLendOrderDbService.changeStatus(orderId, ItemLendOrderStatus.CANCELED);
+        iItemDbService.changeStatus(iItemLendOrderExtra.getItemId(), ItemStatus.NORMAL);
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "lend/delete/{orderId}", method = RequestMethod.PUT)
+    public ResponseEntity lendDelete(@PathVariable(value = "orderId") Long orderId) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        Long userId = currentUser.getId();
+        IItemLendOrderExtra iItemLendOrderExtra = iItemLendOrderDbService.get(orderId);
+        if (!iItemLendOrderExtra.getUserId().equals(userId)) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        if (!iItemLendOrderExtra.getStatus().equals(ItemLendOrderStatus.CANCELED.getIndex())) {
+            return XResponse.errorCode(ErrorCode.LEND_CANCEL_STATUS_NOT_MATCH);
+        }
+        iItemLendOrderDbService.changeStatus(orderId, ItemLendOrderStatus.DELETED);
         return XResponse.ok("success");
     }
 }

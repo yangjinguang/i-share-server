@@ -1,10 +1,14 @@
 package com.pingyueryou.ishare.entity;
 
 public enum ItemLendOrderStatus {
-    NEW(0),
-    AGREE(1),
-    REJECT(2),
-    CANCELED(3);
+    NEW(1),
+    AGREE(2),
+    REJECT(3),
+    CANCELED(4),
+    IN_RETURN(5),
+    RETURNED(6),
+    OVERDUE(7),
+    DELETED(8);
     private int index;
 
     ItemLendOrderStatus(int index) {

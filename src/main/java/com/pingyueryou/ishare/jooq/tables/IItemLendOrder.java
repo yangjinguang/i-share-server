@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IItemLendOrder extends TableImpl<IItemLendOrderRecord> {
 
-    private static final long serialVersionUID = 1250818473;
+    private static final long serialVersionUID = -546603192;
 
     /**
      * The reference instance of <code>ishare.i_item_lend_order</code>
@@ -83,7 +83,7 @@ public class IItemLendOrder extends TableImpl<IItemLendOrderRecord> {
     /**
      * The column <code>ishare.i_item_lend_order.status</code>.
      */
-    public final TableField<IItemLendOrderRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+    public final TableField<IItemLendOrderRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("1", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>ishare.i_item_lend_order.created_at</code>.

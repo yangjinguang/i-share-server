@@ -29,20 +29,35 @@ public class ShareServiceImpl implements ShareService {
     @Autowired
     private IShareCommentDbService iShareCommentDbService;
 
+
+    private void shareExFill(IShareExtra share) {
+        share.setItemCoverUrl(qiniuClient.downloadUrl(share.getItemCoverUrl()));
+        Long mediaId = share.getMediaId();
+        IShareMedia media = iShareMediaDbService.get(mediaId);
+        media.setPath(qiniuClient.downloadUrl(media.getPath()));
+        share.setMedia(media);
+        List<IShareCommentExtra> comments = this.getComment(share.getId());
+        List<IShareLikeExtra> likes = this.getLike(share.getId());
+        share.setComments(comments);
+        share.setLikes(likes);
+    }
+
+    @Override
+    public IShareExtra detail(Long shareId) {
+        IShareExtra share = iShareDbService.get(shareId);
+        if (share != null) {
+            shareExFill(share);
+            return share;
+        }
+        return null;
+    }
+
     @Override
     public PaginationList<IShareExtra> query(Long classId, Integer page, Integer size) {
         Integer total = iShareDbService.queryCount(classId);
         List<IShareExtra> query = iShareDbService.query(classId, page - 1, size);
         for (IShareExtra share : query) {
-            share.setItemCoverUrl(qiniuClient.downloadUrl(share.getItemCoverUrl()));
-            Long mediaId = share.getMediaId();
-            IShareMedia media = iShareMediaDbService.get(mediaId);
-            media.setPath(qiniuClient.downloadUrl(media.getPath()));
-            share.setMedia(media);
-            List<IShareCommentExtra> comments = this.getComment(share.getId());
-            List<IShareLikeExtra> likes = this.getLike(share.getId());
-            share.setComments(comments);
-            share.setLikes(likes);
+            shareExFill(share);
         }
         PaginationList<IShareExtra> list = new PaginationList<>();
         list.setPagination(new Pagination(total, page, size));

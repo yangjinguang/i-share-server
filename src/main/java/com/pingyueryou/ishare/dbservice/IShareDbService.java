@@ -6,7 +6,7 @@ import com.pingyueryou.ishare.jooq.tables.pojos.IShare;
 import java.util.List;
 
 public interface IShareDbService {
-    IShare get(Long shareId);
+    IShareExtra get(Long shareId);
 
     IShare create(IShare share);
 

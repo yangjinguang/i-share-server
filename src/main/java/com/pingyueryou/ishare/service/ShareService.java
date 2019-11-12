@@ -10,6 +10,7 @@ import com.pingyueryou.ishare.jooq.tables.pojos.IShareMedia;
 import java.util.List;
 
 public interface ShareService {
+    IShareExtra detail(Long shareId);
     PaginationList<IShareExtra> query(Long classId, Integer page, Integer size);
 
     IShare create(Long itemId, Long studentId, Long userId, IShareMedia media, String desc);

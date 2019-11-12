@@ -27,14 +27,36 @@ public class IShareDbServiceImpl implements IShareDbService {
     @Autowired
     private DSLContext context;
 
+    private SelectOnConditionStep<Record> queryRecordGen() {
+        return context.select(I_SHARE.fields())
+                .select(I_USER.NICK_NAME.as("upload_user_name"))
+                .select(I_USER.AVATAR_URL.as("upload_user_avatar_url"))
+                .select(I_STUDENT.NAME.as("student_name"))
+                .select(I_CLASS.NAME.as("student_class_name"))
+                .select(I_GRADE.NAME.as("student_grade_name"))
+                .select(I_ITEM.TITLE.as("item_title"))
+                .select(I_ITEM.COVER_URL.as("item_cover_url"))
+                .from(I_SHARE)
+                .leftJoin(I_USER)
+                .on(I_USER.ID.eq(I_SHARE.UPLOAD_USER_ID))
+                .leftJoin(I_STUDENT)
+                .on(I_STUDENT.ID.eq(I_SHARE.STUDENT_ID))
+                .leftJoin(I_ITEM)
+                .on(I_ITEM.ID.eq(I_SHARE.ITEM_ID))
+                .leftJoin(I_CLASS)
+                .on(I_STUDENT.CLASS_ID.eq(I_CLASS.ID))
+                .leftJoin(I_GRADE)
+                .on(I_GRADE.ID.eq(I_CLASS.GRADE_ID));
+    }
+
     @Override
-    public IShare get(Long shareId) {
-        IShareRecord iShareRecord = context.selectFrom(I_SHARE)
+    public IShareExtra get(Long shareId) {
+        Record record = queryRecordGen()
                 .where(I_SHARE.ID.eq(shareId))
                 .fetchOptional()
                 .orElse(null);
-        if (iShareRecord != null) {
-            return iShareRecord.into(IShare.class);
+        if (record != null) {
+            return record.into(IShareExtra.class);
         }
         return null;
     }
@@ -71,25 +93,7 @@ public class IShareDbServiceImpl implements IShareDbService {
         if (classId != null) {
             conditions.add(I_STUDENT.CLASS_ID.eq(classId));
         }
-        return context.select(I_SHARE.fields())
-                .select(I_USER.NICK_NAME.as("upload_user_name"))
-                .select(I_USER.AVATAR_URL.as("upload_user_avatar_url"))
-                .select(I_STUDENT.NAME.as("student_name"))
-                .select(I_CLASS.NAME.as("student_class_name"))
-                .select(I_GRADE.NAME.as("student_grade_name"))
-                .select(I_ITEM.TITLE.as("item_title"))
-                .select(I_ITEM.COVER_URL.as("item_cover_url"))
-                .from(I_SHARE)
-                .leftJoin(I_USER)
-                .on(I_USER.ID.eq(I_SHARE.UPLOAD_USER_ID))
-                .leftJoin(I_STUDENT)
-                .on(I_STUDENT.ID.eq(I_SHARE.STUDENT_ID))
-                .leftJoin(I_ITEM)
-                .on(I_ITEM.ID.eq(I_SHARE.ITEM_ID))
-                .leftJoin(I_CLASS)
-                .on(I_STUDENT.CLASS_ID.eq(I_CLASS.ID))
-                .leftJoin(I_GRADE)
-                .on(I_GRADE.ID.eq(I_CLASS.GRADE_ID))
+        return queryRecordGen()
                 .where(conditions)
                 .orderBy(I_ITEM.CREATED_AT.desc())
                 .offset(offset)

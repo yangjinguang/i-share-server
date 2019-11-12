@@ -51,6 +51,12 @@ public class ShareController {
         return XResponse.ok(iShare);
     }
 
+    @RequestMapping(path = "{shareId}", method = RequestMethod.GET)
+    public ResponseEntity detail(@PathVariable(value = "shareId") Long shareId) {
+        IShareExtra detail = shareService.detail(shareId);
+        return XResponse.ok(detail);
+    }
+
     @RequestMapping(path = "{shareId}/like", method = RequestMethod.PUT)
     public ResponseEntity like(@PathVariable(value = "shareId") Long shareId) {
         IUserExtra currentUser = userService.getCurrentUser();

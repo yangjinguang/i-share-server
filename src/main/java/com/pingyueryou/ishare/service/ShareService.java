@@ -21,4 +21,6 @@ public interface ShareService {
     void comment(Long shareId, Long userId, String comment);
 
     List<IShareCommentExtra> getComment(Long shareId);
+
+    List<IShareExtra> popularByItemId(Long itemId);
 }

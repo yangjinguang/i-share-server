@@ -88,4 +88,15 @@ public class ShareServiceImpl implements ShareService {
     public List<IShareCommentExtra> getComment(Long shareId) {
         return iShareCommentDbService.getByShareId(shareId);
     }
+
+    @Override
+    public List<IShareExtra> popularByItemId(Long itemId) {
+        List<IShareExtra> iShareExtras = iShareDbService.popularByItemId(itemId, 0, 10);
+        for (IShareExtra iShareExtra : iShareExtras) {
+            IShareMedia media = iShareMediaDbService.get(iShareExtra.getMediaId());
+            media.setPath(qiniuClient.downloadUrl(media.getPath()));
+            iShareExtra.setMedia(media);
+        }
+        return iShareExtras;
+    }
 }

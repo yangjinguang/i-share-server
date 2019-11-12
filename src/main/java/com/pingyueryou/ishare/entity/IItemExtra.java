@@ -9,6 +9,7 @@ public class IItemExtra extends IItem {
     private String uploadUserName;
     private IClassExtra iClass;
     private List<IItemTag> tags;
+    private List<IShareExtra> popularShares;
 
     public IItemExtra() {
     }
@@ -39,5 +40,13 @@ public class IItemExtra extends IItem {
 
     public void setTags(List<IItemTag> tags) {
         this.tags = tags;
+    }
+
+    public List<IShareExtra> getPopularShares() {
+        return popularShares;
+    }
+
+    public void setPopularShares(List<IShareExtra> popularShares) {
+        this.popularShares = popularShares;
     }
 }

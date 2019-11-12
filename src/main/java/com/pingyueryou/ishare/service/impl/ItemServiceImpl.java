@@ -6,9 +6,9 @@ import com.pingyueryou.ishare.dbservice.IItemLendOrderDbService;
 import com.pingyueryou.ishare.entity.*;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItem;
 import com.pingyueryou.ishare.jooq.tables.pojos.IItemLendOrder;
-import com.pingyueryou.ishare.jooq.tables.pojos.IItemTag;
 import com.pingyueryou.ishare.service.ItemService;
 import com.pingyueryou.ishare.service.QiniuClient;
+import com.pingyueryou.ishare.service.ShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,8 @@ public class ItemServiceImpl implements ItemService {
     private QiniuClient qiniuClient;
     @Autowired
     private IItemLendOrderDbService iItemLendOrderDbService;
+    @Autowired
+    private ShareService shareService;
 
     @Override
     public void serialize(List<IItem> items) {
@@ -39,10 +41,9 @@ public class ItemServiceImpl implements ItemService {
             return null;
         }
         iItem.setCoverUrl(qiniuClient.downloadUrl(iItem.getCoverUrl()));
-        IClassExtra iClass = iClassDbService.get(iItem.getClassId());
-        iItem.setiClass(iClass);
-        List<IItemTag> tags = iItemDbService.getTagsByItemId(iItem.getId());
-        iItem.setTags(tags);
+        iItem.setiClass(iClassDbService.get(iItem.getClassId()));
+        iItem.setTags(iItemDbService.getTagsByItemId(iItem.getId()));
+        iItem.setPopularShares(shareService.popularByItemId(itemId));
         return iItem;
     }
 

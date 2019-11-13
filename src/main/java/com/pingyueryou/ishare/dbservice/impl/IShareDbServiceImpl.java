@@ -88,10 +88,13 @@ public class IShareDbServiceImpl implements IShareDbService {
     }
 
     @Override
-    public List<IShareExtra> query(Long classId, Integer offset, Integer size) {
+    public List<IShareExtra> query(Long classId, Long userId, Integer offset, Integer size) {
         ArrayList<Condition> conditions = new ArrayList<>();
         if (classId != null) {
             conditions.add(I_STUDENT.CLASS_ID.eq(classId));
+        }
+        if (userId != null) {
+            conditions.add(I_SHARE.UPLOAD_USER_ID.eq(userId));
         }
         return queryRecordGen()
                 .where(conditions)

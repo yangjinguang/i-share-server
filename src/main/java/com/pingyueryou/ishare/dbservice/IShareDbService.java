@@ -14,7 +14,7 @@ public interface IShareDbService {
 
     Integer queryCount(Long classId);
 
-    List<IShareExtra> query(Long classId, Integer offset, Integer size);
+    List<IShareExtra> query(Long classId,Long userId, Integer offset, Integer size);
 
     List<IShareExtra> popularByItemId(Long itemId, Integer offset, Integer size);
 }

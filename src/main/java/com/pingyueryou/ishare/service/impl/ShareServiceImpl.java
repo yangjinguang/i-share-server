@@ -53,9 +53,9 @@ public class ShareServiceImpl implements ShareService {
     }
 
     @Override
-    public PaginationList<IShareExtra> query(Long classId, Integer page, Integer size) {
+    public PaginationList<IShareExtra> query(Long classId, Long userId, Integer page, Integer size) {
         Integer total = iShareDbService.queryCount(classId);
-        List<IShareExtra> query = iShareDbService.query(classId, page - 1, size);
+        List<IShareExtra> query = iShareDbService.query(classId, userId, page - 1, size);
         for (IShareExtra share : query) {
             shareExFill(share);
         }

@@ -27,9 +27,10 @@ public class ShareController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity query(@RequestParam(value = "classId", required = false) Long classId,
+                                @RequestParam(value = "userId", required = false) Long userId,
                                 @RequestParam(value = "page", defaultValue = "1") Integer page,
                                 @RequestParam(value = "size", defaultValue = "20") Integer size) {
-        PaginationList<IShareExtra> query = shareService.query(classId, page, size);
+        PaginationList<IShareExtra> query = shareService.query(classId, userId, page, size);
         return XResponse.ok(query);
     }
 

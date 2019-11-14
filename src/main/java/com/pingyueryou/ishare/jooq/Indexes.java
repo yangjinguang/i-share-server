@@ -7,6 +7,7 @@ package com.pingyueryou.ishare.jooq;
 import com.pingyueryou.ishare.jooq.tables.IClass;
 import com.pingyueryou.ishare.jooq.tables.IGrade;
 import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
+import com.pingyueryou.ishare.jooq.tables.IIndexBanner;
 import com.pingyueryou.ishare.jooq.tables.IItem;
 import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
@@ -48,6 +49,7 @@ public class Indexes {
     public static final Index I_CLASS_PRIMARY = Indexes0.I_CLASS_PRIMARY;
     public static final Index I_GRADE_PRIMARY = Indexes0.I_GRADE_PRIMARY;
     public static final Index I_ID_AUTH_ORDER_PRIMARY = Indexes0.I_ID_AUTH_ORDER_PRIMARY;
+    public static final Index I_INDEX_BANNER_PRIMARY = Indexes0.I_INDEX_BANNER_PRIMARY;
     public static final Index I_ITEM_PRIMARY = Indexes0.I_ITEM_PRIMARY;
     public static final Index I_ITEM_LEND_ORDER_PRIMARY = Indexes0.I_ITEM_LEND_ORDER_PRIMARY;
     public static final Index I_ITEM_TAG_PRIMARY = Indexes0.I_ITEM_TAG_PRIMARY;
@@ -76,6 +78,7 @@ public class Indexes {
         public static Index I_CLASS_PRIMARY = Internal.createIndex("PRIMARY", IClass.I_CLASS, new OrderField[] { IClass.I_CLASS.ID }, true);
         public static Index I_GRADE_PRIMARY = Internal.createIndex("PRIMARY", IGrade.I_GRADE, new OrderField[] { IGrade.I_GRADE.ID }, true);
         public static Index I_ID_AUTH_ORDER_PRIMARY = Internal.createIndex("PRIMARY", IIdAuthOrder.I_ID_AUTH_ORDER, new OrderField[] { IIdAuthOrder.I_ID_AUTH_ORDER.ID }, true);
+        public static Index I_INDEX_BANNER_PRIMARY = Internal.createIndex("PRIMARY", IIndexBanner.I_INDEX_BANNER, new OrderField[] { IIndexBanner.I_INDEX_BANNER.ID }, true);
         public static Index I_ITEM_PRIMARY = Internal.createIndex("PRIMARY", IItem.I_ITEM, new OrderField[] { IItem.I_ITEM.ID }, true);
         public static Index I_ITEM_LEND_ORDER_PRIMARY = Internal.createIndex("PRIMARY", IItemLendOrder.I_ITEM_LEND_ORDER, new OrderField[] { IItemLendOrder.I_ITEM_LEND_ORDER.ID }, true);
         public static Index I_ITEM_TAG_PRIMARY = Internal.createIndex("PRIMARY", IItemTag.I_ITEM_TAG, new OrderField[] { IItemTag.I_ITEM_TAG.ID }, true);

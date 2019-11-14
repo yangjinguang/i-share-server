@@ -7,6 +7,7 @@ package com.pingyueryou.ishare.jooq;
 import com.pingyueryou.ishare.jooq.tables.IClass;
 import com.pingyueryou.ishare.jooq.tables.IGrade;
 import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
+import com.pingyueryou.ishare.jooq.tables.IIndexBanner;
 import com.pingyueryou.ishare.jooq.tables.IItem;
 import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
@@ -45,7 +46,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Ishare extends SchemaImpl {
 
-    private static final long serialVersionUID = -1508119091;
+    private static final long serialVersionUID = -583205808;
 
     /**
      * The reference instance of <code>ishare</code>
@@ -66,6 +67,11 @@ public class Ishare extends SchemaImpl {
      * The table <code>ishare.i_id_auth_order</code>.
      */
     public final IIdAuthOrder I_ID_AUTH_ORDER = com.pingyueryou.ishare.jooq.tables.IIdAuthOrder.I_ID_AUTH_ORDER;
+
+    /**
+     * The table <code>ishare.i_index_banner</code>.
+     */
+    public final IIndexBanner I_INDEX_BANNER = com.pingyueryou.ishare.jooq.tables.IIndexBanner.I_INDEX_BANNER;
 
     /**
      * The table <code>ishare.i_item</code>.
@@ -160,6 +166,7 @@ public class Ishare extends SchemaImpl {
             IClass.I_CLASS,
             IGrade.I_GRADE,
             IIdAuthOrder.I_ID_AUTH_ORDER,
+            IIndexBanner.I_INDEX_BANNER,
             IItem.I_ITEM,
             IItemLendOrder.I_ITEM_LEND_ORDER,
             IItemTag.I_ITEM_TAG,

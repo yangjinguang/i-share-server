@@ -7,6 +7,7 @@ package com.pingyueryou.ishare.jooq;
 import com.pingyueryou.ishare.jooq.tables.IClass;
 import com.pingyueryou.ishare.jooq.tables.IGrade;
 import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
+import com.pingyueryou.ishare.jooq.tables.IIndexBanner;
 import com.pingyueryou.ishare.jooq.tables.IItem;
 import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
@@ -51,6 +52,11 @@ public class Tables {
      * The table <code>ishare.i_id_auth_order</code>.
      */
     public static final IIdAuthOrder I_ID_AUTH_ORDER = com.pingyueryou.ishare.jooq.tables.IIdAuthOrder.I_ID_AUTH_ORDER;
+
+    /**
+     * The table <code>ishare.i_index_banner</code>.
+     */
+    public static final IIndexBanner I_INDEX_BANNER = com.pingyueryou.ishare.jooq.tables.IIndexBanner.I_INDEX_BANNER;
 
     /**
      * The table <code>ishare.i_item</code>.

@@ -7,6 +7,7 @@ package com.pingyueryou.ishare.jooq;
 import com.pingyueryou.ishare.jooq.tables.IClass;
 import com.pingyueryou.ishare.jooq.tables.IGrade;
 import com.pingyueryou.ishare.jooq.tables.IIdAuthOrder;
+import com.pingyueryou.ishare.jooq.tables.IIndexBanner;
 import com.pingyueryou.ishare.jooq.tables.IItem;
 import com.pingyueryou.ishare.jooq.tables.IItemLendOrder;
 import com.pingyueryou.ishare.jooq.tables.IItemTag;
@@ -23,6 +24,7 @@ import com.pingyueryou.ishare.jooq.tables.IUserStudent;
 import com.pingyueryou.ishare.jooq.tables.records.IClassRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IGradeRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IIdAuthOrderRecord;
+import com.pingyueryou.ishare.jooq.tables.records.IIndexBannerRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemLendOrderRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemRecord;
 import com.pingyueryou.ishare.jooq.tables.records.IItemTagItemRecord;
@@ -65,6 +67,7 @@ public class Keys {
     public static final Identity<IClassRecord, Long> IDENTITY_I_CLASS = Identities0.IDENTITY_I_CLASS;
     public static final Identity<IGradeRecord, Long> IDENTITY_I_GRADE = Identities0.IDENTITY_I_GRADE;
     public static final Identity<IIdAuthOrderRecord, Long> IDENTITY_I_ID_AUTH_ORDER = Identities0.IDENTITY_I_ID_AUTH_ORDER;
+    public static final Identity<IIndexBannerRecord, Long> IDENTITY_I_INDEX_BANNER = Identities0.IDENTITY_I_INDEX_BANNER;
     public static final Identity<IItemRecord, Long> IDENTITY_I_ITEM = Identities0.IDENTITY_I_ITEM;
     public static final Identity<IItemLendOrderRecord, Long> IDENTITY_I_ITEM_LEND_ORDER = Identities0.IDENTITY_I_ITEM_LEND_ORDER;
     public static final Identity<IItemTagRecord, Long> IDENTITY_I_ITEM_TAG = Identities0.IDENTITY_I_ITEM_TAG;
@@ -86,6 +89,7 @@ public class Keys {
     public static final UniqueKey<IClassRecord> KEY_I_CLASS_PRIMARY = UniqueKeys0.KEY_I_CLASS_PRIMARY;
     public static final UniqueKey<IGradeRecord> KEY_I_GRADE_PRIMARY = UniqueKeys0.KEY_I_GRADE_PRIMARY;
     public static final UniqueKey<IIdAuthOrderRecord> KEY_I_ID_AUTH_ORDER_PRIMARY = UniqueKeys0.KEY_I_ID_AUTH_ORDER_PRIMARY;
+    public static final UniqueKey<IIndexBannerRecord> KEY_I_INDEX_BANNER_PRIMARY = UniqueKeys0.KEY_I_INDEX_BANNER_PRIMARY;
     public static final UniqueKey<IItemRecord> KEY_I_ITEM_PRIMARY = UniqueKeys0.KEY_I_ITEM_PRIMARY;
     public static final UniqueKey<IItemLendOrderRecord> KEY_I_ITEM_LEND_ORDER_PRIMARY = UniqueKeys0.KEY_I_ITEM_LEND_ORDER_PRIMARY;
     public static final UniqueKey<IItemTagRecord> KEY_I_ITEM_TAG_PRIMARY = UniqueKeys0.KEY_I_ITEM_TAG_PRIMARY;
@@ -119,6 +123,7 @@ public class Keys {
         public static Identity<IClassRecord, Long> IDENTITY_I_CLASS = Internal.createIdentity(IClass.I_CLASS, IClass.I_CLASS.ID);
         public static Identity<IGradeRecord, Long> IDENTITY_I_GRADE = Internal.createIdentity(IGrade.I_GRADE, IGrade.I_GRADE.ID);
         public static Identity<IIdAuthOrderRecord, Long> IDENTITY_I_ID_AUTH_ORDER = Internal.createIdentity(IIdAuthOrder.I_ID_AUTH_ORDER, IIdAuthOrder.I_ID_AUTH_ORDER.ID);
+        public static Identity<IIndexBannerRecord, Long> IDENTITY_I_INDEX_BANNER = Internal.createIdentity(IIndexBanner.I_INDEX_BANNER, IIndexBanner.I_INDEX_BANNER.ID);
         public static Identity<IItemRecord, Long> IDENTITY_I_ITEM = Internal.createIdentity(IItem.I_ITEM, IItem.I_ITEM.ID);
         public static Identity<IItemLendOrderRecord, Long> IDENTITY_I_ITEM_LEND_ORDER = Internal.createIdentity(IItemLendOrder.I_ITEM_LEND_ORDER, IItemLendOrder.I_ITEM_LEND_ORDER.ID);
         public static Identity<IItemTagRecord, Long> IDENTITY_I_ITEM_TAG = Internal.createIdentity(IItemTag.I_ITEM_TAG, IItemTag.I_ITEM_TAG.ID);
@@ -138,6 +143,7 @@ public class Keys {
         public static final UniqueKey<IClassRecord> KEY_I_CLASS_PRIMARY = Internal.createUniqueKey(IClass.I_CLASS, "KEY_i_class_PRIMARY", IClass.I_CLASS.ID);
         public static final UniqueKey<IGradeRecord> KEY_I_GRADE_PRIMARY = Internal.createUniqueKey(IGrade.I_GRADE, "KEY_i_grade_PRIMARY", IGrade.I_GRADE.ID);
         public static final UniqueKey<IIdAuthOrderRecord> KEY_I_ID_AUTH_ORDER_PRIMARY = Internal.createUniqueKey(IIdAuthOrder.I_ID_AUTH_ORDER, "KEY_i_id_auth_order_PRIMARY", IIdAuthOrder.I_ID_AUTH_ORDER.ID);
+        public static final UniqueKey<IIndexBannerRecord> KEY_I_INDEX_BANNER_PRIMARY = Internal.createUniqueKey(IIndexBanner.I_INDEX_BANNER, "KEY_i_index_banner_PRIMARY", IIndexBanner.I_INDEX_BANNER.ID);
         public static final UniqueKey<IItemRecord> KEY_I_ITEM_PRIMARY = Internal.createUniqueKey(IItem.I_ITEM, "KEY_i_item_PRIMARY", IItem.I_ITEM.ID);
         public static final UniqueKey<IItemLendOrderRecord> KEY_I_ITEM_LEND_ORDER_PRIMARY = Internal.createUniqueKey(IItemLendOrder.I_ITEM_LEND_ORDER, "KEY_i_item_lend_order_PRIMARY", IItemLendOrder.I_ITEM_LEND_ORDER.ID);
         public static final UniqueKey<IItemTagRecord> KEY_I_ITEM_TAG_PRIMARY = Internal.createUniqueKey(IItemTag.I_ITEM_TAG, "KEY_i_item_tag_PRIMARY", IItemTag.I_ITEM_TAG.ID);

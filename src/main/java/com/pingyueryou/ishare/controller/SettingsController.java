@@ -29,6 +29,9 @@ public class SettingsController {
     @RequestMapping(path = "banner", method = RequestMethod.GET)
     public ResponseEntity getBanners() {
         List<IIndexBanner> all = iIndexBannerDbService.getAll();
+        for (IIndexBanner banner : all) {
+            banner.setImageUrl(qiniuClient.downloadUrl(banner.getImageUrl()));
+        }
         return XResponse.ok(all);
     }
 

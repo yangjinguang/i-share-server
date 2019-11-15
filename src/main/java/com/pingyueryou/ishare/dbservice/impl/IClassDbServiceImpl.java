@@ -111,14 +111,17 @@ public class IClassDbServiceImpl implements IClassDbService {
     }
 
     @Override
-    public List<IClass> getByUserId(Long userId) {
+    public List<IClassExtra> getByUserId(Long userId) {
         return context.select(I_CLASS.fields())
+                .select(I_GRADE.NAME.as("grade_name"))
                 .from(I_USER_CLASS)
                 .leftJoin(I_CLASS)
                 .on(I_CLASS.ID.eq(I_USER_CLASS.CLASS_ID))
+                .leftJoin(I_GRADE)
+                .on(I_GRADE.ID.eq(I_CLASS.GRADE_ID))
                 .where(I_USER_CLASS.USER_ID.eq(userId))
                 .fetch()
-                .into(IClass.class);
+                .into(IClassExtra.class);
     }
 
     @Override
@@ -181,5 +184,13 @@ public class IClassDbServiceImpl implements IClassDbService {
                 .orElseThrow(NoDataFoundException::new);
         iGradeRecord.setOrder(order);
         iGradeRecord.update();
+    }
+
+    @Override
+    public Integer countByUserId(Long userId) {
+        return context.selectCount().from(I_USER_CLASS)
+                .where(I_USER_CLASS.USER_ID.eq(userId))
+                .fetchOne()
+                .into(Integer.class);
     }
 }

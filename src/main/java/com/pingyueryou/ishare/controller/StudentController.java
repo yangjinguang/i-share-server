@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.controller;
 
 import com.pingyueryou.ishare.dbservice.IStudentDbService;
+import com.pingyueryou.ishare.entity.IStudentExtra;
 import com.pingyueryou.ishare.entity.IUserExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IStudent;
 import com.pingyueryou.ishare.service.UserService;
@@ -65,7 +66,7 @@ public class StudentController {
         if (!currentUser.isParent()) {
             return XResponse.ok(new ArrayList<IStudent>());
         }
-        List<IStudent> byUserId = iStudentDbService.getByUserId(currentUser.getId());
+        List<IStudentExtra> byUserId = iStudentDbService.getByUserId(currentUser.getId());
         return XResponse.ok(byUserId);
     }
 }

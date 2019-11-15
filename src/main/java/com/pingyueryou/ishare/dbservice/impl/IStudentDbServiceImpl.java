@@ -1,6 +1,7 @@
 package com.pingyueryou.ishare.dbservice.impl;
 
 import com.pingyueryou.ishare.dbservice.IStudentDbService;
+import com.pingyueryou.ishare.entity.IStudentExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IStudent;
 import com.pingyueryou.ishare.jooq.tables.records.IStudentRecord;
 import com.pingyueryou.ishare.utils.XStringUtils;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.pingyueryou.ishare.jooq.tables.IClass.I_CLASS;
+import static com.pingyueryou.ishare.jooq.tables.IGrade.I_GRADE;
 import static com.pingyueryou.ishare.jooq.tables.IStudent.I_STUDENT;
 import static com.pingyueryou.ishare.jooq.tables.IUserStudent.I_USER_STUDENT;
 
@@ -72,13 +75,27 @@ public class IStudentDbServiceImpl implements IStudentDbService {
     }
 
     @Override
-    public List<IStudent> getByUserId(Long userId) {
+    public List<IStudentExtra> getByUserId(Long userId) {
         return context.select(I_STUDENT.fields())
+                .select(I_CLASS.NAME.as("class_name"))
+                .select(I_GRADE.NAME.as("grade_name"))
                 .from(I_USER_STUDENT)
                 .leftJoin(I_STUDENT)
                 .on(I_STUDENT.ID.eq(I_USER_STUDENT.STUDENT_ID))
+                .leftJoin(I_CLASS)
+                .on(I_CLASS.ID.eq(I_STUDENT.CLASS_ID))
+                .leftJoin(I_GRADE)
+                .on(I_GRADE.ID.eq(I_CLASS.GRADE_ID))
                 .where(I_USER_STUDENT.USER_ID.eq(userId))
                 .fetch()
-                .into(IStudent.class);
+                .into(IStudentExtra.class);
+    }
+
+    @Override
+    public Integer countByUserId(Long userId) {
+        return context.selectCount().from(I_USER_STUDENT)
+                .where(I_USER_STUDENT.USER_ID.eq(userId))
+                .fetchOne()
+                .into(Integer.class);
     }
 }

@@ -28,7 +28,7 @@ public class UserController {
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
     public ResponseEntity profile() {
         IUserExtra user = userService.getCurrentUser();
-        List<IClass> classes = iClassDbService.getByUserId(user.getId());
+        List<IClassExtra> classes = iClassDbService.getByUserId(user.getId());
         user.setClasses(classes);
         return XResponse.ok(user);
     }
@@ -106,6 +106,44 @@ public class UserController {
             } else {
                 iIdAuthOrderDbService.changeStatus(orderId, IdAuthOrderStatus.REJECT.getIndex());
             }
+        }
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "unbind-class", method = RequestMethod.PUT)
+    public ResponseEntity unbindClass(@RequestBody UnbindClassBody body) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        Long userId = body.getUserId();
+        Long classId = body.getClassId();
+        if (userId == null || classId == null) {
+            return XResponse.errorCode(ErrorCode.PARAM_ERROR);
+        }
+        if (!currentUser.isAdmin() && !currentUser.getId().equals(body.getUserId())) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        userService.leaveClass(userId, classId);
+        Integer count = userService.countClassByUserId(userId);
+        if (count <= 0) {
+            userService.rmRole(userId, Role.TEACHER.getIndex());
+        }
+        return XResponse.ok("success");
+    }
+
+    @RequestMapping(path = "unbind-student", method = RequestMethod.PUT)
+    public ResponseEntity unbindStudent(@RequestBody UnbindStudentBody body) {
+        IUserExtra currentUser = userService.getCurrentUser();
+        Long userId = body.getUserId();
+        Long studentId = body.getStudentId();
+        if (userId == null || studentId == null) {
+            return XResponse.errorCode(ErrorCode.PARAM_ERROR);
+        }
+        if (!currentUser.isAdmin() && !currentUser.getId().equals(body.getUserId())) {
+            return XResponse.errorCode(ErrorCode.FORBIDDEN);
+        }
+        userService.unbindStudent(userId, studentId);
+        Integer count = userService.countStudentByUserId(userId);
+        if (count <= 0) {
+            userService.rmRole(userId, Role.PARENT.getIndex());
         }
         return XResponse.ok("success");
     }

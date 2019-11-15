@@ -26,7 +26,7 @@ public interface IClassDbService {
 
     void deleteGrade(Long gradeId);
 
-    List<IClass> getByUserId(Long userId);
+    List<IClassExtra> getByUserId(Long userId);
 
     void createUserClass(IUserClass userClass);
 
@@ -39,5 +39,7 @@ public interface IClassDbService {
     void updateOrder(Long classId, Integer order);
 
     void updateGradeOrder(Long gradeId, Integer order);
+
+    Integer countByUserId(Long userId);
 
 }

@@ -56,6 +56,13 @@ public class ClassController {
         return XResponse.ok(all);
     }
 
+    @RequestMapping(path = "/my", method = RequestMethod.GET)
+    public ResponseEntity getMyClass() {
+        IUserExtra currentUser = userService.getCurrentUser();
+        List<IClassExtra> byUserId = iClassDbService.getByUserId(currentUser.getId());
+        return XResponse.ok(byUserId);
+    }
+
     @RequestMapping(path = "/{classId}", method = RequestMethod.GET)
     public ResponseEntity get(@PathVariable(value = "classId") Long classId) {
         IClass iClass = iClassDbService.get(classId);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class IUserExtra extends IUser {
     private List<Integer> roles;
-    private List<IClass> classes;
+    private List<IClassExtra> classes;
 
     public IUserExtra() {
     }
@@ -29,11 +29,11 @@ public class IUserExtra extends IUser {
         this.roles = roles;
     }
 
-    public List<IClass> getClasses() {
+    public List<IClassExtra> getClasses() {
         return classes;
     }
 
-    public void setClasses(List<IClass> classes) {
+    public void setClasses(List<IClassExtra> classes) {
         this.classes = classes;
     }
 

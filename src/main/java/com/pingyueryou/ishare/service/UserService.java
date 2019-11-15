@@ -14,6 +14,10 @@ public interface UserService {
 
     List<Long> getClassIds(Long userId);
 
+    Integer countClassByUserId(Long userId);
+
+    Integer countStudentByUserId(Long userId);
+
     void addRole(Long userId, Integer role);
 
     void rmRole(Long userId, Integer role);

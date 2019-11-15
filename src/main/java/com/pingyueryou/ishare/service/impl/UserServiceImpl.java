@@ -1,7 +1,9 @@
 package com.pingyueryou.ishare.service.impl;
 
 import com.pingyueryou.ishare.dbservice.IClassDbService;
+import com.pingyueryou.ishare.dbservice.IStudentDbService;
 import com.pingyueryou.ishare.dbservice.IUserStudentDbService;
+import com.pingyueryou.ishare.entity.IClassExtra;
 import com.pingyueryou.ishare.entity.IUserExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IClass;
 import com.pingyueryou.ishare.jooq.tables.pojos.IUser;
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
     private IClassDbService iClassDbService;
     @Autowired
     private IUserStudentDbService iUserStudentDbService;
+    @Autowired
+    private IStudentDbService iStudentDbService;
 
     @Override
     public IUser updateByOpenId(String openId, IUser iUser) {
@@ -40,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public IUserExtra detail(String openId) {
         IUserExtra userEx = iUserDbService.getByOpenId(openId);
-        List<IClass> classes = iClassDbService.getByUserId(userEx.getId());
+        List<IClassExtra> classes = iClassDbService.getByUserId(userEx.getId());
         userEx.setClasses(classes);
         return userEx;
     }
@@ -53,12 +57,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Long> getClassIds(Long userId) {
-        List<IClass> classes = iClassDbService.getByUserId(userId);
+        List<IClassExtra> classes = iClassDbService.getByUserId(userId);
         ArrayList<Long> classIds = new ArrayList<>();
         for (IClass aClass : classes) {
             classIds.add(aClass.getId());
         }
         return classIds;
+    }
+
+    @Override
+    public Integer countClassByUserId(Long userId) {
+        return iClassDbService.countByUserId(userId);
+    }
+
+    @Override
+    public Integer countStudentByUserId(Long userId) {
+        return iStudentDbService.countByUserId(userId);
     }
 
     @Override

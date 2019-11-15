@@ -1,5 +1,6 @@
 package com.pingyueryou.ishare.dbservice;
 
+import com.pingyueryou.ishare.entity.IStudentExtra;
 import com.pingyueryou.ishare.jooq.tables.pojos.IStudent;
 
 import java.util.List;
@@ -15,5 +16,7 @@ public interface IStudentDbService {
 
     void delete(Long studentId);
 
-    List<IStudent> getByUserId(Long userId);
+    List<IStudentExtra> getByUserId(Long userId);
+
+    Integer countByUserId(Long userId);
 }

@@ -28,6 +28,9 @@
         <db.password/>
         <jooq.version>3.10.8</jooq.version>
         <fastjson.version>1.2.46</fastjson.version>
+
+        <docker-maven-plugin.version>1.1.1</docker-maven-plugin.version>
+        <dockerfile-maven-plugin.version>1.4.7</dockerfile-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -93,9 +96,100 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-maven-plugin.version}</version>
+                    <configuration>
+                        <imageName>${artifactId}</imageName>
+                        <baseImage>docker-java:latest</baseImage>
+                        <workdir>/app</workdir>
+                        <env>
+                            <TZ>Asia/Shanghai</TZ>
+                        </env>
+                        <entryPoint>["boot.sh", "${project.build.finalName}.${project.packaging}"]</entryPoint>
+                        <resources>
+                            <resource>
+                                <targetPath>/app</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <include>${project.build.finalName}.${project.packaging}</include>
+                            </resource>
+                        </resources>
+                        <runs>
+                            <run>ln -snf /usr/share/zoneinfo/$TZ /etc/localtime</run>
+                            <run>echo $TZ &gt; /etc/timezone</run>
+                        </runs>
+                        <forceTags>true</forceTags>
+                        <imageTags>
+                            <imageTag>${project.version}</imageTag>
+                        </imageTags>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>build-image</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>push-image</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>push</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile-maven-plugin.version}</version>
+                    <configuration>
+                        <repository>${artifactId}</repository>
+                        <!--<tag>${project.version}</tag>-->
+                        <buildArgs>
+                            <APP_NAME>${artifactId}</APP_NAME>
+                            <FINAL_NAME>${project.build.finalName}</FINAL_NAME>
+                            <JAR_FILE>${project.build.finalName}.${project.packaging}</JAR_FILE>
+                        </buildArgs>
+                        <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>build-image</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>tag</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>tag</goal>
+                            </goals>
+                            <configuration>
+                                <repository>${artifactId}</repository>
+                                <tag>${project.version}</tag>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>push-image</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>push</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
                 <plugin>
                     <groupId>org.flywaydb</groupId>
                     <artifactId>flyway-maven-plugin</artifactId>

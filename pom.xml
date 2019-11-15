@@ -108,7 +108,7 @@
                     <artifactId>docker-maven-plugin</artifactId>
                     <version>${docker-maven-plugin.version}</version>
                     <configuration>
-                        <imageName>${artifactId}</imageName>
+                        <imageName>${project.artifactId}</imageName>
                         <baseImage>docker-java:latest</baseImage>
                         <workdir>/app</workdir>
                         <env>
@@ -153,10 +153,10 @@
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>${dockerfile-maven-plugin.version}</version>
                     <configuration>
-                        <repository>${artifactId}</repository>
+                        <repository>${project.artifactId}</repository>
                         <!--<tag>${project.version}</tag>-->
                         <buildArgs>
-                            <APP_NAME>${artifactId}</APP_NAME>
+                            <APP_NAME>${project.artifactId}</APP_NAME>
                             <FINAL_NAME>${project.build.finalName}</FINAL_NAME>
                             <JAR_FILE>${project.build.finalName}.${project.packaging}</JAR_FILE>
                         </buildArgs>
@@ -177,7 +177,7 @@
                                 <goal>tag</goal>
                             </goals>
                             <configuration>
-                                <repository>${artifactId}</repository>
+                                <repository>${project.artifactId}</repository>
                                 <tag>${project.version}</tag>
                             </configuration>
                         </execution>

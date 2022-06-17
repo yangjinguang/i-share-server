@@ -27,7 +27,7 @@
         <db.username>root</db.username>
         <db.password/>
         <jooq.version>3.10.8</jooq.version>
-        <fastjson.version>1.2.46</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
 
         <docker-maven-plugin.version>1.1.1</docker-maven-plugin.version>
         <dockerfile-maven-plugin.version>1.4.7</dockerfile-maven-plugin.version>

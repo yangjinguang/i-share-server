@@ -18,7 +18,7 @@
         <app.basePackage>com.pingyueryou.ishare</app.basePackage>
         <java.version>1.8</java.version>
         <flyway.version>5.2.4</flyway.version>
-        <mysql.version>8.0.16</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <db.driver>com.mysql.cj.jdbc.Driver</db.driver>
         <db.host>localhost</db.host>
         <db.port>3306</db.port>
